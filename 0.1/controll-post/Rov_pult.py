@@ -12,8 +12,8 @@ from RovControl import RovController
 # PATH_LOG = '/home/rock/SoftProteus/0.1/controll-post/log/'
 
 # запуск на ноутбуке 
-PATH_CONFIG = 'C:/Users/Yarik/Documents/SoftProteus/0.1/controll-post/'
-PATH_LOG = 'C:/Users/Yarik/Documents/SoftProteus/0.1/controll-post/log/'
+PATH_CONFIG = 'C:/Users/Yarik/Documents/SoftProteus-main/0.1/controll-post/'
+PATH_LOG = 'C:/Users/Yarik/Documents/SoftProteus-main/0.1/controll-post/log/'
 
 # запуск на виртуалке 
 #PATH_CONFIG = '/home/yarik9008/Рабочий стол/0.1/controll-post/'

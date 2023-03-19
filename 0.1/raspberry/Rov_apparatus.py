@@ -5,6 +5,7 @@ from RovCommunication import RovClient
 from RovLogging import RovLogger
 import subprocess
 
+# user: Prot password: rov
 
 # запуск на одноплатном компьютере Raspberry pi4 
 PATH_CONFIG = '/home/rov-prot/SoftProteus/0.1/raspberry/' 
