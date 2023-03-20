@@ -1,8 +1,0 @@
-2022-11-02 14:13:41,356 : INFO : Start logging
-2022-11-02 14:13:41,356 : INFO : ROV waiting for connection
-2022-11-02 14:13:51,974 : INFO : ROV Connected <socket.socket fd=780, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('192.168.2.100', 3000), raddr=('192.168.2.109', 52182)>
-2022-11-02 14:13:52,407 : INFO : Controller PS4 init
-2022-11-02 14:13:52,408 : INFO : Main post init
-2022-11-02 14:13:52,408 : INFO : Controller PS4 listen
-2022-11-02 14:13:52,408 : INFO : Pult run
-2022-11-02 14:15:09,870 : INFO : ROV disconnection <socket.socket fd=780, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('192.168.2.100', 3000), raddr=('192.168.2.109', 52182)>

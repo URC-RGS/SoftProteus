@@ -34,7 +34,7 @@ class RovServer:
     def receiver_data(self):
         #Прием информации с аппарата
         if self.check_connect:
-            data = self.user_socket.recv(512)
+            data = self.user_socket.recv(1024)
             if len(data) == 0:
                 self.server.close()
                 self.check_connect = False

@@ -41,8 +41,6 @@ class RovController():
 
         self.sleep_listen = int(self.joi_config['time_sleep_joi'])
 
-        self.power_motor = float(self.joi_config['power_motor'])
-
         self.forward_back = float(self.joi_config['forward_back_defolt']) * self.power_motor * 32767
 
         self.cor_forward_back = float(self.joi_config['cor_forward_back_defolt'])

@@ -7,21 +7,10 @@ from RovCommunication import RovServer
 from RovLogging import RovLogger
 from RovControl import RovController
 
-# запуск на одноплатнике 
-# PATH_CONFIG = '/home/rock/SoftProteus/0.1/controll-post/'
-# PATH_LOG = '/home/rock/SoftProteus/0.1/controll-post/log/'
-
 # запуск на ноутбуке 
 PATH_CONFIG = 'C:/Users/Yarik/Documents/SoftProteus-main/0.1/controll-post/'
 PATH_LOG = 'C:/Users/Yarik/Documents/SoftProteus-main/0.1/controll-post/log/'
 
-# запуск на виртуалке 
-#PATH_CONFIG = '/home/yarik9008/Рабочий стол/0.1/controll-post/'
-#PATH_LOG = '/home/yarik9008/Рабочий стол/0.1/controll-post/log/'
-
-# запуск на компьютере 
-#PATH_CONFIG = 'C:/DOCUMENTS/git_rep/SoftProteus/0.1/controll-post/'
-#PATH_LOG = 'C:/DOCUMENTS/git_rep/SoftProteus/0.1/controll-post/log/'
 
 class RovPost:
     def __init__(self):
