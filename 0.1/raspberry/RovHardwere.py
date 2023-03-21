@@ -1,74 +1,74 @@
 import board
 import busio
 from time import sleep  # библиотека длязадержек
-import adafruit_ads1x15.ads1115 as ADS
-from adafruit_ads1x15.analog_in import AnalogIn
+# import adafruit_ads1x15.ads1115 as ADS
+# from adafruit_ads1x15.analog_in import AnalogIn
 from adafruit_servokit import ServoKit
 import FaBo9Axis_MPU9250
 from math import atan2, pi
 import ms5837
 from RovLogging import RovLogger
 
-class Acp:
-    def __init__(self, logger: RovLogger):
-        '''
-        Класс описывающий взаимодействие и опрос датчиков тока
-        '''
-        self.logger = logger
-        try:
-            self.i2c = busio.I2C(board.SCL, board.SDA)
-            self.ads13 = ADS.ADS1115(self.i2c)
-            self.adc46 = ADS.ADS1115(self.i2c, address=0x49)
-            a0 = AnalogIn(self.ads13, ADS.P0)
-            a1 = AnalogIn(self.ads13, ADS.P1)
-            a2 = AnalogIn(self.ads13, ADS.P2)
-            a3 = AnalogIn(self.adc46, ADS.P3)
-            a4 = AnalogIn(self.adc46, ADS.P0)
-            a5 = AnalogIn(self.adc46, ADS.P1)
+# class Acp:
+#     def __init__(self, logger: RovLogger):
+#         '''
+#         Класс описывающий взаимодействие и опрос датчиков тока
+#         '''
+#         self.logger = logger
+#         try:
+#             self.i2c = busio.I2C(board.SCL, board.SDA)
+#             self.ads13 = ADS.ADS1115(self.i2c)
+#             self.adc46 = ADS.ADS1115(self.i2c, address=0x49)
+#             a0 = AnalogIn(self.ads13, ADS.P0)
+#             a1 = AnalogIn(self.ads13, ADS.P1)
+#             a2 = AnalogIn(self.ads13, ADS.P2)
+#             a3 = AnalogIn(self.adc46, ADS.P3)
+#             a4 = AnalogIn(self.adc46, ADS.P0)
+#             a5 = AnalogIn(self.adc46, ADS.P1)
             
 
-            self.CorNulA1 = a0.value
-            self.CorNulA2 = a1.value
-            self.CorNulA3 = a2.value
-            self.CorNulA4 = a3.value
-            self.CorNulA5 = a4.value
-            self.CorNulA6 = a5.value
-            self.logger.info('ADC1115-init')
-        except:
-            self.logger.critical('NO-ADC1115')
+#             self.CorNulA1 = a0.value
+#             self.CorNulA2 = a1.value
+#             self.CorNulA3 = a2.value
+#             self.CorNulA4 = a3.value
+#             self.CorNulA5 = a4.value
+#             self.CorNulA6 = a5.value
+#             self.logger.info('ADC1115-init')
+#         except:
+#             self.logger.critical('NO-ADC1115')
         
-        self.MassOut = {}
+#         self.MassOut = {}
 
-    def ReqestAmper(self):
-        try:
-            #Функция опроса датчиков тока 
-            a0 = AnalogIn(self.ads13, ADS.P0)
-            a1 = AnalogIn(self.ads13, ADS.P1)
-            a2 = AnalogIn(self.ads13, ADS.P2)
-            a3 = AnalogIn(self.ads13, ADS.P3)
-            a4 = AnalogIn(self.adc46, ADS.P0)
-            a5 = AnalogIn(self.adc46, ADS.P1)
-            v = AnalogIn(self.adc46, ADS.P2)
-            # TODO  матан для перевода значений - отсылается уже в амперах
-            self.MassOut['a0'] = round(
-                (a0.value - self.CorNulA1) * 0.00057321919, 3)
-            self.MassOut['a1'] = round(
-                (a1.value - self.CorNulA2) * 0.00057321919, 3)
-            self.MassOut['a2'] = round(
-                (a2.value - self.CorNulA3) * 0.00057321919, 3)
-            self.MassOut['a3'] = round(
-                (a3.value - self.CorNulA4) * 0.00057321919, 3)
-            self.MassOut['a4'] = round(
-                (a4.value - self.CorNulA5) * 0.00057321919, 3)
-            self.MassOut['a5'] = round(
-                (a5.value - self.CorNulA6) * 0.00057321919, 3)
+#     def ReqestAmper(self):
+#         try:
+#             #Функция опроса датчиков тока 
+#             a0 = AnalogIn(self.ads13, ADS.P0)
+#             a1 = AnalogIn(self.ads13, ADS.P1)
+#             a2 = AnalogIn(self.ads13, ADS.P2)
+#             a3 = AnalogIn(self.ads13, ADS.P3)
+#             a4 = AnalogIn(self.adc46, ADS.P0)
+#             a5 = AnalogIn(self.adc46, ADS.P1)
+#             v = AnalogIn(self.adc46, ADS.P2)
+#             # TODO  матан для перевода значений - отсылается уже в амперах
+#             self.MassOut['a0'] = round(
+#                 (a0.value - self.CorNulA1) * 0.00057321919, 3)
+#             self.MassOut['a1'] = round(
+#                 (a1.value - self.CorNulA2) * 0.00057321919, 3)
+#             self.MassOut['a2'] = round(
+#                 (a2.value - self.CorNulA3) * 0.00057321919, 3)
+#             self.MassOut['a3'] = round(
+#                 (a3.value - self.CorNulA4) * 0.00057321919, 3)
+#             self.MassOut['a4'] = round(
+#                 (a4.value - self.CorNulA5) * 0.00057321919, 3)
+#             self.MassOut['a5'] = round(
+#                 (a5.value - self.CorNulA6) * 0.00057321919, 3)
             
-            self.MassOut['v'] = round(v.voltage * 5, 3)
-            # возвращает словарь с значениями амрепметра нумерация с нуля
-            return self.MassOut
-        except:
-            self.logger.critical('NO-ADC1115')
-            return None
+#             self.MassOut['v'] = round(v.voltage * 5, 3)
+#             # возвращает словарь с значениями амрепметра нумерация с нуля
+#             return self.MassOut
+#         except:
+#             self.logger.critical('NO-ADC1115')
+#             return None
 
 
 class Compass:
@@ -217,18 +217,18 @@ class ReqiestSensor:
     # класс-адаптер обьеденяющий в себе сбор информации с всех сенсоров 
     def __init__(self, logger):
         self.logger = logger
-        self.acp = Acp(self.logger) # обект класса ацп 
+        # self.acp = Acp(self.logger) # обект класса ацп 
         self.mpu9250 = Compass(self.logger) # обьект класса compass 
         self.ms5837 = DeptAndTemp(self.logger)
     
     def reqiest(self):
         # опрос датчиков; возвращает обьект класса словарь 
-        massacp  = self.acp.ReqestAmper()
+        # massacp  = self.acp.ReqestAmper()
         massaz = self.mpu9250.reqiest()
         #print('azim: ', massaz['azim'])
         massMs5837 = self.ms5837.reqiest()
         
-        massout = {**massacp, **massaz, **massMs5837}
+        massout = {**massaz, **massMs5837}
         
         return massout
    
