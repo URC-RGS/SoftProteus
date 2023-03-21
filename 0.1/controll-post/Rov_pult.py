@@ -15,6 +15,7 @@ from RovControl import RovController
 # запуск на ноутбуке 
 PATH_CONFIG = 'C:/Users/Yarik/Documents/SoftProteus-main/0.1/controll-post/'
 PATH_LOG = PATH_CONFIG + 'log/'
+PATH_RECORD = 'C:/Users/Yarik/YandexDisk/Детская подводная робототехника/Соревновательные ТНПА/Записи камер роботов на соревнованиях/Соревнования Астрахань 03.2023/'
 
 
 class RovPost:
@@ -104,12 +105,12 @@ class RovPost:
 
         while True:
             # счетчик частоты 
-            deley = datetime.now() - self.data_input['time']
-            deley = deley.total_seconds()
-            self.mass_rate.append(round(1 / deley))
-            if len(self.mass_rate) >= 100:
-                print(sum(self.mass_rate) // 100)
-                self.mass_rate = []
+            # deley = datetime.now() - self.data_input['time']
+            # deley = deley.total_seconds()
+            # self.mass_rate.append(round(1 / deley))
+            # if len(self.mass_rate) >= 100:
+            #     print(sum(self.mass_rate) // 100)
+            #     self.mass_rate = []
 
             # запрос данный из класса пульта (потенциально слабое место)
             data = self.data_pult
@@ -165,7 +166,7 @@ class RovPost:
     def record_video(self):
         screen_size=pyautogui.size()
 
-        video = cv2.VideoWriter('Recording.avi', cv2.VideoWriter_fourcc(*'MJPG'), 20, screen_size)
+        video = cv2.VideoWriter('{PATH_RECORD}{time}-screen-rec.avi', cv2.VideoWriter_fourcc(*'MJPG'), 20, screen_size)
 
         while True:
             screen_shot_img = pyautogui.screenshot()
@@ -177,7 +178,8 @@ class RovPost:
             video.write(frame)
             
     def stream_video(self):
-        os.system("")
+        time = '-'.join('-'.join('-'.join(str(datetime.now()).split()).split('.')).split(':')) + '.log'
+        os.system(f"gst-launch-1.0 -v udpsrc port=9000 ! application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)H264 ! rtph264depay ! avdec_h264 ! videoconvert ! tee name=t t. ! queue ! avimux name=mux ! filesink location={PATH_RECORD}{time}-stream-rec.avi t. ! queue ! autovideosink sync=false")
 
     def run_main(self):
         '''запуск процессов опроса джойстика и основного цикла программы'''
