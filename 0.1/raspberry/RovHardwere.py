@@ -4,7 +4,7 @@ from time import sleep  # библиотека длязадержек
 # import adafruit_ads1x15.ads1115 as ADS
 # from adafruit_ads1x15.analog_in import AnalogIn
 from adafruit_servokit import ServoKit
-import FaBo9Axis_MPU9250
+# import FaBo9Axis_MPU9250
 from math import atan2, pi
 import ms5837
 from RovLogging import RovLogger
@@ -71,25 +71,25 @@ from RovLogging import RovLogger
 #             return None
 
 
-class Compass:
-    # класс описывающий общение с модулем навигации mpu9250
-    def __init__(self, logger: RovLogger):
-        self.logger = logger
+# class Compass:
+#     # класс описывающий общение с модулем навигации mpu9250
+#     def __init__(self, logger: RovLogger):
+#         self.logger = logger
         
-        try:
-            self.mpu9250 = FaBo9Axis_MPU9250.MPU9250()
-            self.logger.info('MPU9250-init')
-        except:
-            self.logger.critical('NO-MPU9250')
+#         try:
+#             self.mpu9250 = FaBo9Axis_MPU9250.MPU9250()
+#             self.logger.info('MPU9250-init')
+#         except:
+#             self.logger.critical('NO-MPU9250')
     
-    def reqiest(self):
-        # возвращает словарь с значениями азимута
-        try:
-            mag = self.mpu9250.readMagnet()
-            return {'azim':(round((atan2(mag['x'], mag['y']) * 180 / pi), 3))}
-        except:
-            self.logger.critical('NO-MPU9250')
-            return None
+#     def reqiest(self):
+#         # возвращает словарь с значениями азимута
+#         try:
+#             mag = self.mpu9250.readMagnet()
+#             return {'azim':(round((atan2(mag['x'], mag['y']) * 180 / pi), 3))}
+#         except:
+#             self.logger.critical('NO-MPU9250')
+#             return None
 
 
 class DeptAndTemp:
@@ -218,17 +218,17 @@ class ReqiestSensor:
     def __init__(self, logger):
         self.logger = logger
         # self.acp = Acp(self.logger) # обект класса ацп 
-        self.mpu9250 = Compass(self.logger) # обьект класса compass 
+        # self.mpu9250 = Compass(self.logger) # обьект класса compass 
         self.ms5837 = DeptAndTemp(self.logger)
     
     def reqiest(self):
         # опрос датчиков; возвращает обьект класса словарь 
         # massacp  = self.acp.ReqestAmper()
-        massaz = self.mpu9250.reqiest()
+        # massaz = self.mpu9250.reqiest()
         #print('azim: ', massaz['azim'])
         massMs5837 = self.ms5837.reqiest()
         
-        massout = {**massaz, **massMs5837}
+        massout = {**massMs5837}
         
         return massout
    

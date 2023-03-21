@@ -8,8 +8,8 @@ import subprocess
 # user: Prot password: rov
 
 # запуск на одноплатном компьютере Raspberry pi4 
-PATH_CONFIG = '/home/rov-prot/SoftProteus/0.1/raspberry/' 
-PATH_LOG = '/home/rov-prot/SoftProteus/0.1/raspberry/log/'
+PATH_CONFIG = '/home/Prot/SoftProteus-main/0.1/raspberry/' 
+PATH_LOG = '/home/Prot/SoftProteus-main/0.1/raspberry/log/'
 
 # пути по умолчанию при установки raspberry os
 # PATH_CONFIG = '/home/pi/SoftProteus/0.1/raspberry/' 
