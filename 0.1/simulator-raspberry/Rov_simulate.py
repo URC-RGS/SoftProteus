@@ -4,13 +4,10 @@ from RovCommunication import RovClient
 from RovLogging import RovLogger
 from RovHardwere import *
 
-# запуск на одноплатнике 
-PATH_CONFIG = '/home/rock/SoftProteus/0.1/simulator-raspberry/'
-PATH_LOG = '/home/rock/SoftProteus/0.1/simulator-raspberry/log/'
 
-# запуск на ноутбуке
-# PATH_CONFIG = '/Users/yarik/Documents/SoftProteus/0.1/simulator-raspberry/'
-# PATH_LOG = '/Users/yarik/Documents/SoftProteus/0.1/simulator-raspberry/log/'
+
+PATH_CONFIG = 'C:/Users/Yarik/Documents/SoftProteus-main/0.1/simulator-raspberry/'
+PATH_LOG = PATH_CONFIG + 'log/'
 
 
 class MainApparat:

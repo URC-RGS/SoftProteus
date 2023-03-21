@@ -1,3 +1,7 @@
+import os
+import cv2
+import pyautogui
+import numpy as np
 import threading
 from datetime import datetime
 from distutils import util
@@ -7,21 +11,12 @@ from RovCommunication import RovServer
 from RovLogging import RovLogger
 from RovControl import RovController
 
-# запуск на одноплатнике 
-# PATH_CONFIG = '/home/rock/SoftProteus/0.1/controll-post/'
-# PATH_LOG = '/home/rock/SoftProteus/0.1/controll-post/log/'
 
 # запуск на ноутбуке 
 PATH_CONFIG = 'C:/Users/Yarik/Documents/SoftProteus-main/0.1/controll-post/'
-PATH_LOG = 'C:/Users/Yarik/Documents/SoftProteus-main/0.1/controll-post/log/'
+PATH_LOG = PATH_CONFIG + 'log/'
+PATH_RECORD = 'C:/Users/Yarik/YandexDisk/Детская подводная робототехника/Соревновательные ТНПА/Записи камер роботов на соревнованиях/Соревнования Астрахань 03.2023/'
 
-# запуск на виртуалке 
-#PATH_CONFIG = '/home/yarik9008/Рабочий стол/0.1/controll-post/'
-#PATH_LOG = '/home/yarik9008/Рабочий стол/0.1/controll-post/log/'
-
-# запуск на компьютере 
-#PATH_CONFIG = 'C:/DOCUMENTS/git_rep/SoftProteus/0.1/controll-post/'
-#PATH_LOG = 'C:/DOCUMENTS/git_rep/SoftProteus/0.1/controll-post/log/'
 
 class RovPost:
     def __init__(self):
@@ -96,7 +91,7 @@ class RovPost:
         Движение вниз - (5 вверх 6 вверх)
         '''
         def transformation(value: int):
-            # Функция перевода значений АЦП с джойстика в проценты
+            # Функция перевода значений АЦП 
             value = (32768 - value) // 655
             return value
 
@@ -110,12 +105,12 @@ class RovPost:
 
         while True:
             # счетчик частоты 
-            deley = datetime.now() - self.data_input['time']
-            deley = deley.total_seconds()
-            self.mass_rate.append(round(1 / deley))
-            if len(self.mass_rate) >= 100:
-                print(sum(self.mass_rate) // 100)
-                self.mass_rate = []
+            # deley = datetime.now() - self.data_input['time']
+            # deley = deley.total_seconds()
+            # self.mass_rate.append(round(1 / deley))
+            # if len(self.mass_rate) >= 100:
+            #     print(sum(self.mass_rate) // 100)
+            #     self.mass_rate = []
 
             # запрос данный из класса пульта (потенциально слабое место)
             data = self.data_pult
@@ -167,15 +162,36 @@ class RovPost:
                 break
 
             QtCore.QThread.msleep(self.rate_command_out)
-            #sleep(self.rate_command_out)
+            
+    def record_video(self):
+        screen_size=pyautogui.size()
+
+        video = cv2.VideoWriter('{PATH_RECORD}{time}-screen-rec.avi', cv2.VideoWriter_fourcc(*'MJPG'), 20, screen_size)
+
+        while True:
+            screen_shot_img = pyautogui.screenshot()
+
+            frame = np.array(screen_shot_img)
+
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            
+            video.write(frame)
+            
+    def stream_video(self):
+        time = '-'.join('-'.join('-'.join(str(datetime.now()).split()).split('.')).split(':')) + '.log'
+        os.system(f"gst-launch-1.0 -v udpsrc port=9000 ! application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)H264 ! rtph264depay ! avdec_h264 ! videoconvert ! tee name=t t. ! queue ! avimux name=mux ! filesink location={PATH_RECORD}{time}-stream-rec.avi t. ! queue ! autovideosink sync=false")
 
     def run_main(self):
         '''запуск процессов опроса джойстика и основного цикла программы'''
         self.thread_joi = threading.Thread(target=self.run_controller)
         self.thread_com = threading.Thread(target=self.run_command)
+        self.thread_stream_video = threading.Thread(target=self.stream_video)
+        self.thread_record_video = threading.Thread(target=self.record_video)
 
         self.thread_joi.start()
         self.thread_com.start()
+        self.thread_stream_video.start()
+        self.thread_record_video.start()
 
 
 if __name__ == '__main__':

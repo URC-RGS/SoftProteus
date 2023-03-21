@@ -1,0 +1,7 @@
+2023-03-21 14:25:27,649 : INFO : Start logging
+2023-03-21 14:25:27,649 : INFO : ROV waiting for connection
+2023-03-21 14:25:31,954 : INFO : ROV Connected <socket.socket fd=1424, family=2, type=1, proto=0, laddr=('127.0.0.1', 2000), raddr=('127.0.0.1', 64237)>
+2023-03-21 14:25:33,242 : INFO : Controller PS4 init
+2023-03-21 14:25:33,243 : INFO : Main post init
+2023-03-21 14:25:33,245 : INFO : Controller PS4 listen
+2023-03-21 14:25:33,246 : INFO : Pult run
