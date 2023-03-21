@@ -1,3 +1,7 @@
+import os
+import cv2
+import pyautogui
+import numpy as np
 import threading
 from datetime import datetime
 from distutils import util
@@ -7,9 +11,10 @@ from RovCommunication import RovServer
 from RovLogging import RovLogger
 from RovControl import RovController
 
+
 # запуск на ноутбуке 
 PATH_CONFIG = 'C:/Users/Yarik/Documents/SoftProteus-main/0.1/controll-post/'
-PATH_LOG = 'C:/Users/Yarik/Documents/SoftProteus-main/0.1/controll-post/log/'
+PATH_LOG = PATH_CONFIG + 'log/'
 
 
 class RovPost:
@@ -85,7 +90,7 @@ class RovPost:
         Движение вниз - (5 вверх 6 вверх)
         '''
         def transformation(value: int):
-            # Функция перевода значений АЦП с джойстика в проценты
+            # Функция перевода значений АЦП 
             value = (32768 - value) // 655
             return value
 
@@ -156,15 +161,35 @@ class RovPost:
                 break
 
             QtCore.QThread.msleep(self.rate_command_out)
-            #sleep(self.rate_command_out)
+            
+    def record_video(self):
+        screen_size=pyautogui.size()
+
+        video = cv2.VideoWriter('Recording.avi', cv2.VideoWriter_fourcc(*'MJPG'), 20, screen_size)
+
+        while True:
+            screen_shot_img = pyautogui.screenshot()
+
+            frame = np.array(screen_shot_img)
+
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            
+            video.write(frame)
+            
+    def stream_video(self):
+        os.system("")
 
     def run_main(self):
         '''запуск процессов опроса джойстика и основного цикла программы'''
         self.thread_joi = threading.Thread(target=self.run_controller)
         self.thread_com = threading.Thread(target=self.run_command)
+        self.thread_stream_video = threading.Thread(target=self.stream_video)
+        self.thread_record_video = threading.Thread(target=self.record_video)
 
         self.thread_joi.start()
         self.thread_com.start()
+        self.thread_stream_video.start()
+        self.thread_record_video.start()
 
 
 if __name__ == '__main__':
