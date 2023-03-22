@@ -74,6 +74,10 @@ class RovController():
         self.reverse_up_down = bool(util.strtobool(self.joi_config['reverse_up_down']))
 
         self.reverse_turn_left_turn_righ = bool(util.strtobool(self.joi_config['reverse_turn_left_turn_righ']))
+        
+        self.min_value_cam = float(self.joi_config['min_value_cam'])
+        
+        self.max_value_cam = float(self.joi_config['max_value_cam'])
 
         self.running = True
 
@@ -90,10 +94,10 @@ class RovController():
                 # опрос нажания кнопок
                 if event.type == pygame.JOYBUTTONDOWN:
                     if event.button == self.camera_up:
-                        cor_servo_cam = -1
+                        cor_servo_cam = -3
 
                     if event.button == self.camera_down:
-                        cor_servo_cam = 1
+                        cor_servo_cam = 3
 
                     if event.button == self.arm_up:
                         self.data_pult['man'] = 180
@@ -171,11 +175,11 @@ class RovController():
             self.data_pult['servo_сam'] += cor_servo_cam
             
             # проверка на корректность значений 
-            if self.data_pult['servo_сam'] >= 180:
-                self.data_pult['servo_сam'] = 180
+            if self.data_pult['servo_сam'] >= self.max_value_cam:
+                self.data_pult['servo_сam'] = self.max_value_cam
 
-            elif self.data_pult['servo_сam'] <= 0:
-                self.data_pult['servo_сam'] = 0
+            elif self.data_pult['servo_сam'] <= self.min_value_cam:
+                self.data_pult['servo_сam'] = self.min_value_cam
 
             QtCore.QThread.msleep(self.sleep_listen)
 

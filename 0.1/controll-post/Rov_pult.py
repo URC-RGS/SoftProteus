@@ -165,8 +165,8 @@ class RovPost:
             
     def record_video(self):
         screen_size=pyautogui.size()
-
-        video = cv2.VideoWriter('{PATH_RECORD}{time}-screen-rec.avi', cv2.VideoWriter_fourcc(*'MJPG'), 20, screen_size)
+        time = '-'.join('-'.join('-'.join(str(datetime.now()).split()).split('.')).split(':'))
+        video = cv2.VideoWriter(f'{PATH_RECORD}-{time}-screen-rec.avi', cv2.VideoWriter_fourcc(*'MJPG'), 20, screen_size)
 
         while True:
             screen_shot_img = pyautogui.screenshot()
@@ -178,20 +178,20 @@ class RovPost:
             video.write(frame)
             
     def stream_video(self):
-        time = '-'.join('-'.join('-'.join(str(datetime.now()).split()).split('.')).split(':')) + '.log'
+        time = '-'.join('-'.join('-'.join(str(datetime.now()).split()).split('.')).split(':'))
         os.system(f"gst-launch-1.0 -v udpsrc port=9000 ! application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)H264 ! rtph264depay ! avdec_h264 ! videoconvert ! tee name=t t. ! queue ! avimux name=mux ! filesink location={PATH_RECORD}{time}-stream-rec.avi t. ! queue ! autovideosink sync=false")
 
     def run_main(self):
         '''запуск процессов опроса джойстика и основного цикла программы'''
         self.thread_joi = threading.Thread(target=self.run_controller)
         self.thread_com = threading.Thread(target=self.run_command)
-        self.thread_stream_video = threading.Thread(target=self.stream_video)
-        self.thread_record_video = threading.Thread(target=self.record_video)
+        # self.thread_stream_video = threading.Thread(target=self.stream_video)
+        # self.thread_record_video = threading.Thread(target=self.record_video)
 
         self.thread_joi.start()
         self.thread_com.start()
-        self.thread_stream_video.start()
-        self.thread_record_video.start()
+        # self.thread_stream_video.start()
+        # self.thread_record_video.start()
 
 
 if __name__ == '__main__':
