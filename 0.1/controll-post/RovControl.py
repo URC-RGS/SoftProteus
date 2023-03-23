@@ -26,6 +26,8 @@ class RovController():
                          'j2_val_y': 0, 'j2_val_x': 0,
                          'man': 90, 'servo_сam': 90,
                          'led': 0}
+        
+        print(self.joi_config)
 
         self.camera_up = int(self.joi_config[self.joi_config['camera_up']])
 
@@ -85,7 +87,7 @@ class RovController():
         
         self.nitro_up_down = float(self.joi_config['nitro_up_down_defolt']) * 32767
         
-        self.nitro_turn_left_turn_righ = float(self.joi_config['nitro_turn_left_turn_righ_defol']) * 32767
+        self.nitro_turn_left_turn_righ = float(self.joi_config['nitro_turn_left_turn_righ_defolt']) * 32767
         
         self.on_off_nitro = 3
 
