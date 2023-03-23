@@ -78,6 +78,18 @@ class RovController():
         self.min_value_cam = float(self.joi_config['min_value_cam'])
         
         self.max_value_cam = float(self.joi_config['max_value_cam'])
+        
+        self.nitro_forward_back = float(self.joi_config['nitro_forward_back_defolt']) * 32767
+        
+        self.nitro_left_right = float(self.joi_config['nitro_left_right_defolt']) * 32767
+        
+        self.nitro_up_down = float(self.joi_config['nitro_up_down_defolt']) * 32767
+        
+        self.nitro_turn_left_turn_righ = float(self.joi_config['nitro_turn_left_turn_righ_defol']) * 32767
+        
+        self.on_off_nitro = 3
+
+        self.nitro_mode = False
 
         self.running = True
 
@@ -110,6 +122,9 @@ class RovController():
 
                     if event.button == self.led_down:
                         self.data_pult['led'] = 0
+                    
+                    if event.button == self.on_off_nitro:
+                        self.nitro_mode = not self.nitro_mode
 
                 if event.type == pygame.JOYBUTTONUP:
                     if event.button == self.camera_up:
@@ -122,41 +137,63 @@ class RovController():
                 if event.type == pygame.JOYAXISMOTION:
                     if event.axis == self.move_forward_back:
                         if abs(round(event.value, 3)) >= self.min_value and self.reverse_forward_back:
-                            self.data_pult['j1_val_y'] = int(round(event.value, 2) * self.forward_back * -1) - self.cor_forward_back
-                        
+                            if self.nitro_mode:
+                                self.data_pult['j1_val_y'] = int(round(event.value, 2) * self.nitro_forward_back * -1)
+                            else:
+                                self.data_pult['j1_val_y'] = int(round(event.value, 2) * self.forward_back * -1)
+                                
                         elif abs(round(event.value, 3)) >= self.min_value and not self.reverse_forward_back:
-                            self.data_pult['j1_val_y'] = int(round(event.value, 2) * self.forward_back) - self.cor_forward_back
+                            if self.nitro_mode:
+                                self.data_pult['j1_val_y'] = int(round(event.value, 2) * self.nitro_forward_back)
+                            else:
+                                self.data_pult['j1_val_y'] = int(round(event.value, 2) * self.forward_back)
 
                         else:
                             self.data_pult['j1_val_y'] = 0
 
                     if event.axis == self.move_left_right:
                         if abs(round(event.value, 3)) >= self.min_value and self.reverse_left_right:
-                            self.data_pult['j1_val_x'] = int(round(event.value, 2) * self.left_right * -1) - self.cor_left_right
+                            if self.nitro_mode:
+                                self.data_pult['j1_val_x'] = int(round(event.value, 2) * self.nitro_left_right * -1)
+                            else:
+                                self.data_pult['j1_val_x'] = int(round(event.value, 2) * self.left_right * -1)
 
                         elif abs(round(event.value, 3)) >= self.min_value and not self.reverse_left_right:
-                            self.data_pult['j1_val_x'] = int(round(event.value, 2) * self.left_right) - self.cor_left_right
-
+                            if self.nitro_mode:
+                                self.data_pult['j1_val_x'] = int(round(event.value, 2) * self.nitro_left_right)
+                            else:
+                                self.data_pult['j1_val_x'] = int(round(event.value, 2) * self.left_right)
                         else:
                             self.data_pult['j1_val_x'] = 0
 
                     if event.axis == self.move_up_down:
                         if abs(round(event.value, 3)) >= self.min_value and self.reverse_up_down:
-                            self.data_pult['j2_val_y'] = int(round(event.value, 2) * self.up_down * -1) - self.cor_up_down
+                            if self.nitro_mode:
+                                self.data_pult['j2_val_y'] = int(round(event.value, 2) * self.nitro_up_down * -1)
+                            else:
+                                self.data_pult['j2_val_y'] = int(round(event.value, 2) * self.up_down * -1)
 
                         elif abs(round(event.value, 3)) >= self.min_value and not self.reverse_up_down:
-                            self.data_pult['j2_val_y'] = int(round(event.value, 2) * self.up_down) - self.cor_up_down
+                            if self.nitro_mode:
+                                self.data_pult['j2_val_y'] = int(round(event.value, 2) * self.nitro_up_down)
+                            else:
+                                self.data_pult['j2_val_y'] = int(round(event.value, 2) * self.up_down)
 
                         else:
                             self.data_pult['j2_val_y'] = 0
 
                     if event.axis == self.move_turn_left_turn_righ:
                         if abs(round(event.value, 3)) >= self.min_value and self.reverse_turn_left_turn_righ:
-                            self.data_pult['j2_val_x'] = int(round(event.value, 2) * self.turn_left_turn_righ * -1) - self.cor_turn_left_turn_righ
+                            if self.nitro_mode:
+                                self.data_pult['j2_val_x'] = int(round(event.value, 2) * self.nitro_turn_left_turn_righ * -1)
+                            else:
+                                self.data_pult['j2_val_x'] = int(round(event.value, 2) * self.turn_left_turn_righ * -1)
 
                         elif abs(round(event.value, 3)) >= self.min_value and not self.reverse_turn_left_turn_righ:
-                            self.data_pult['j2_val_x'] = int(round(event.value, 2) * self.turn_left_turn_righ) - self.cor_turn_left_turn_righ
-
+                            if self.nitro_mode:
+                                self.data_pult['j2_val_x'] = int(round(event.value, 2) * self.nitro_turn_left_turn_righ)
+                            else:
+                                self.data_pult['j2_val_x'] = int(round(event.value, 2) * self.turn_left_turn_righ)
                         else:
                             self.data_pult['j2_val_x'] = 0
 
