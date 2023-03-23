@@ -164,7 +164,7 @@ class PwmControl:
         # взаимодействие с сервоприводом камеры 
         self.servoCam = self.kit.servo[config['pin_servo_cam']]
         
-        self.servoCam.angle = 90
+        self.servoCam.angle = 50
         
         # взаимодействие с светильником 
         self.led = self.kit.servo[config['pin_led']]

@@ -67,22 +67,25 @@ class MainApparat:
 
         
     def RunMainApparat(self):
-        # прием информации с поста управления
-        # отработка по принятой информации
-        # сбор информации с датчиков
-        # отправка телеметрии на пост управления
-        while True:
-            data = self.client.receiver_data()
-            if data != None:
-                self.controllmass = data  # прием информации с поста управления
-            else:
-                continue
+        try:
+            # прием информации с поста управления
+            # отработка по принятой информации
+            # сбор информации с датчиков
+            # отправка телеметрии на пост управления
+            while True:
+                data = self.client.receiver_data()
+                if data != None:
+                    self.controllmass = data  # прием информации с поста управления
+                else:
+                    continue
 
-            self.comandor.commanda(self.controllmass)
-            # сбор информации с датчиков и отправка на пост управления
-            dataout = self.sensor.reqiest()
-            dataout['time'] = data['time']
-            self.client.send_data(dataout)
+                self.comandor.commanda(self.controllmass)
+                # сбор информации с датчиков и отправка на пост управления
+                dataout = self.sensor.reqiest()
+                dataout['time'] = data['time']
+                self.client.send_data(dataout)
+        except:
+            pass
 
 
 if __name__ == '__main__':
