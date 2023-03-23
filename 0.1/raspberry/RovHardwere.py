@@ -85,7 +85,7 @@ from RovLogging import RovLogger
 #     def reqiest(self):
 #         # возвращает словарь с значениями азимута
 #         try:
-#             mag = self.mpu9250.readMagnet()
+            #  mag = self.mpu9250.readMagnet()
 #             return {'azim':(round((atan2(mag['x'], mag['y']) * 180 / pi), 3))}
 #         except:
 #             self.logger.critical('NO-MPU9250')
