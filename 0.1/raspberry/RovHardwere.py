@@ -127,8 +127,8 @@ class PwmControl:
     def __init__(self, config:dict):
         self.logger = config['logi']
         # диапазон шим модуляции 
-        self.pwmMin = 1100
-        self.pwmMax = 1950
+        self.pwmMin = 1000
+        self.pwmMax = 2000
         # коофиценты корректировки мощности на каждый мотор 
         self.CorDrk0 = 1
         self.CorDrk1 = 1
@@ -186,12 +186,12 @@ class PwmControl:
         self.drk4.angle = 0
         self.drk5.angle = 0
         sleep(2)
-        self.drk0.angle = 87
-        self.drk1.angle = 87
-        self.drk2.angle = 87
-        self.drk3.angle = 87
-        self.drk4.angle = 87
-        self.drk5.angle = 87
+        self.drk0.angle = 90
+        self.drk1.angle = 90
+        self.drk2.angle = 90
+        self.drk3.angle = 90
+        self.drk4.angle = 90
+        self.drk5.angle = 90
         sleep(3)
 
     def ControlMotor(self, mass: dict):
@@ -249,33 +249,33 @@ class Command:
         
     def commanda(self, command):
         if self.config['reverse_motor_0']:
-            command['motor_0'] = self.safety((180 - command['motor_0'] * 1.8) - 3)
+            command['motor_0'] = self.safety((180 - command['motor_0'] * 1.8))
         else: 
-            command['motor_0'] = self.safety((command['motor_0'] * 1.8) - 3)
+            command['motor_0'] = self.safety((command['motor_0'] * 1.8))
             
         if self.config['reverse_motor_1']:
-            command['motor_1'] = self.safety((180 - command['motor_1'] * 1.8) - 3)
+            command['motor_1'] = self.safety((180 - command['motor_1'] * 1.8))
         else:
-            command['motor_1'] = self.safety((command['motor_1'] * 1.8) - 3)
+            command['motor_1'] = self.safety((command['motor_1'] * 1.8))
         
         if self.config['reverse_motor_2']:
-            command['motor_2'] = self.safety((180 - command['motor_2'] * 1.8) - 3)
+            command['motor_2'] = self.safety((180 - command['motor_2'] * 1.8))
         else:
-            command['motor_2'] = self.safety((command['motor_2'] * 1.8) - 3)
+            command['motor_2'] = self.safety((command['motor_2'] * 1.8))
             
         if self.config['reverse_motor_3']:
-            command['motor_3'] = self.safety((180 - command['motor_3'] * 1.8) - 3)
+            command['motor_3'] = self.safety((180 - command['motor_3'] * 1.8))
         else:
-            command['motor_3'] = self.safety((command['motor_3'] * 1.8) - 3)
+            command['motor_3'] = self.safety((command['motor_3'] * 1.8))
             
         if self.config['reverse_motor_4']:
-            command['motor_4'] = self.safety((180 - command['motor_4'] * 1.8) - 3)
+            command['motor_4'] = self.safety((180 - command['motor_4'] * 1.8))
         else:
-            command['motor_4'] = self.safety((command['motor_4'] * 1.8) - 3)
+            command['motor_4'] = self.safety((command['motor_4'] * 1.8))
             
         if self.config['reverse_motor_5']:
-            command['motor_5'] = self.safety((180 - command['motor_5'] * 1.8) - 3)
+            command['motor_5'] = self.safety((180 - command['motor_5'] * 1.8))
         else:
-            command['motor_5'] = self.safety((command['motor_5'] * 1.8) - 3)
+            command['motor_5'] = self.safety((command['motor_5'] * 1.8))
             
         self.pwmcom.ControlMotor(command)
