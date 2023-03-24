@@ -101,10 +101,8 @@ class RovController():
         self.on_off_nitro = 3
         
         self.on_off_low = 1
-
-        self.nitro_mode = False
         
-        self.low_mode = False
+        self.mod = 0
 
         self.running = True
 
@@ -136,13 +134,19 @@ class RovController():
                         self.data_pult['led'] = 1
 
                     if event.button == self.led_down:
-                        self.data_pult['led'] = 0
+                         self.data_pult['led'] = 0
                     
                     if event.button == self.on_off_nitro:
-                        self.nitro_mode = not self.nitro_mode
+                        if self.mod == 2:
+                            self.mod = 0
+                        else:
+                            self.mod = 2
                         
                     if event.button == self.on_off_low:
-                        self.low_mode = not self.low_mode
+                        if self.mod == 1:
+                            self.mod = 0
+                        else:
+                            self.mod = 1
 
                 if event.type == pygame.JOYBUTTONUP:
                     if event.button == self.camera_up:
@@ -155,19 +159,17 @@ class RovController():
                 if event.type == pygame.JOYAXISMOTION:
                     if event.axis == self.move_forward_back:
                         if abs(round(event.value, 3)) >= self.min_value and self.reverse_forward_back:
-                            if self.low_mode:
+                            if self.mod == 1:
                                 self.data_pult['j1_val_y'] = int(round(event.value, 2) * self.low_forward_back * -1)
-                                
-                            elif self.nitro_mode:
+                            elif self.mod == 2:
                                 self.data_pult['j1_val_y'] = int(round(event.value, 2) * self.nitro_forward_back * -1)
                             else:
                                 self.data_pult['j1_val_y'] = int(round(event.value, 2) * self.forward_back * -1)
                                 
                         elif abs(round(event.value, 3)) >= self.min_value and not self.reverse_forward_back:
-                            if self.low_mode:
+                            if self.mod == 1:
                                 self.data_pult['j1_val_y'] = int(round(event.value, 2) * self.low_forward_back)
-                            
-                            elif self.nitro_mode:
+                            elif self.mod == 2:
                                 self.data_pult['j1_val_y'] = int(round(event.value, 2) * self.nitro_forward_back)
                             else:
                                 self.data_pult['j1_val_y'] = int(round(event.value, 2) * self.forward_back)
@@ -177,19 +179,17 @@ class RovController():
 
                     if event.axis == self.move_left_right:
                         if abs(round(event.value, 3)) >= self.min_value and self.reverse_left_right:
-                            if self.low_mode:
+                            if self.mod == 1:
                                 self.data_pult['j1_val_x'] = int(round(event.value, 2) * self.low_left_right * -1)
-                            
-                            elif self.nitro_mode:
+                            elif self.mod == 2:
                                 self.data_pult['j1_val_x'] = int(round(event.value, 2) * self.nitro_left_right * -1)
                             else:
                                 self.data_pult['j1_val_x'] = int(round(event.value, 2) * self.left_right * -1)
 
                         elif abs(round(event.value, 3)) >= self.min_value and not self.reverse_left_right:
-                            if self.low_mode:
+                            if self.mod == 1:
                                 self.data_pult['j1_val_x'] = int(round(event.value, 2) * self.low_left_right)
-                            
-                            elif self.nitro_mode:
+                            elif self.mod ==2:
                                 self.data_pult['j1_val_x'] = int(round(event.value, 2) * self.nitro_left_right)
                             else:
                                 self.data_pult['j1_val_x'] = int(round(event.value, 2) * self.left_right)
@@ -198,19 +198,17 @@ class RovController():
 
                     if event.axis == self.move_up_down:
                         if abs(round(event.value, 3)) >= self.min_value and self.reverse_up_down:
-                            if self.low_mode:
+                            if self.mod == 1:
                                 self.data_pult['j2_val_y'] = int(round(event.value, 2) * self.low_up_down * -1)
-                            
-                            elif self.nitro_mode:
+                            elif self.mod == 2:
                                 self.data_pult['j2_val_y'] = int(round(event.value, 2) * self.nitro_up_down * -1)
                             else:
                                 self.data_pult['j2_val_y'] = int(round(event.value, 2) * self.up_down * -1)
 
                         elif abs(round(event.value, 3)) >= self.min_value and not self.reverse_up_down:
-                            if self.low_mode:
+                            if self.mod == 1:
                                 self.data_pult['j2_val_y'] = int(round(event.value, 2) * self.low_up_down)
-                            
-                            elif self.nitro_mode:
+                            elif self.mod == 2:
                                 self.data_pult['j2_val_y'] = int(round(event.value, 2) * self.nitro_up_down)
                             else:
                                 self.data_pult['j2_val_y'] = int(round(event.value, 2) * self.up_down)
@@ -220,19 +218,17 @@ class RovController():
 
                     if event.axis == self.move_turn_left_turn_righ:
                         if abs(round(event.value, 3)) >= self.min_value and self.reverse_turn_left_turn_righ:
-                            if self.low_mode:
+                            if self.mod == 1:
                                 self.data_pult['j2_val_x'] = int(round(event.value, 2) * self.low_turn_left_turn_righ * -1)
-                            
-                            elif self.nitro_mode:
+                            elif self.mod == 2:
                                 self.data_pult['j2_val_x'] = int(round(event.value, 2) * self.nitro_turn_left_turn_righ * -1)
                             else:
                                 self.data_pult['j2_val_x'] = int(round(event.value, 2) * self.turn_left_turn_righ * -1)
 
                         elif abs(round(event.value, 3)) >= self.min_value and not self.reverse_turn_left_turn_righ:
-                            if self.low_mode:
+                            if self.mod == 1:
                                 self.data_pult['j2_val_x'] = int(round(event.value, 2) * self.low_turn_left_turn_righ)
-                            
-                            elif self.nitro_mode:
+                            elif self.mod == 2:
                                 self.data_pult['j2_val_x'] = int(round(event.value, 2) * self.nitro_turn_left_turn_righ)
                             else:
                                 self.data_pult['j2_val_x'] = int(round(event.value, 2) * self.turn_left_turn_righ)
