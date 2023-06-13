@@ -1,11 +1,8 @@
 from configparser import ConfigParser
 from distutils import util
-from RovHardwere import ReqiestSensor, Command
 from RovCommunication import RovClient
 from RovLogging import RovLogger
-import subprocess
 
-# user: Prot password: rov
 
 # запуск на одноплатном компьютере Raspberry pi4 
 PATH_CONFIG = '/home/Prot/SoftProteus/0.1/apparatus/' 
@@ -33,8 +30,6 @@ class MainApparat:
 
         self.client = RovClient(self.client_config)
         
-        self.sensor = ReqiestSensor(self.logi)
-        
         self.comandor_config = {'logi': self.logi,
                                 'reverse_motor_0':util.strtobool(self.config['Rov']['reverse_motor_0']),
                                 'reverse_motor_1':util.strtobool(self.config['Rov']['reverse_motor_1']),
@@ -56,12 +51,6 @@ class MainApparat:
                                 
                                 'pin_led':int(self.config['Rov']['pin_led'])}
 
-        self.comandor = Command(self.comandor_config)
-        
-        #subprocess.run('libcamera-vid --width 1280 --height 720 -t 0 --inline -o - | gst-launch-1.0 -v fdsrc ! h264parse ! rtph264pay config-interval=10 pt=96 ! udpsink host=192.168.88.251 port=9000 &')
-        self.logi.info('start gstremmer')
-
-        
     def RunMainApparat(self):
         try:
             # прием информации с поста управления
