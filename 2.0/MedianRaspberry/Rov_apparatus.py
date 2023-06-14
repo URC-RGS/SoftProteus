@@ -50,6 +50,7 @@ class MainApparat:
         try:
             while True:
                 data_in = self.client.receiver_data()
+                self.logi.debug(data_in)
                 if data_in != None:
                     self.controllmass = data_in  # прием информации с поста управления
                 else:
