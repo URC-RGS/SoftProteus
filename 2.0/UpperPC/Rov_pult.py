@@ -53,8 +53,7 @@ class RovPost:
         self.data_pult = self.controll_ps4.data_pult
 
         # словарик для отправки на аппарат
-        self.data_output = {'time': datetime.now(),  # Текущее время
-                           'led': False,  # управление светом
+        self.data_output = {'led': False,  # управление светом
                            'man': 0,  # управление манипулятором
                            'servo_сam': 90,  # управление наклоном камеры
                            'm_0': 50,
@@ -114,16 +113,17 @@ class RovPost:
             j2_val_x = transformation(data['j2_val_x'])
 
             # Подготовка массива для отправки на аппарат
-            self.data_output['m_0'] = defense(j1_val_y)
-            self.data_output['m_1'] = defense(j1_val_y)
-            self.data_output['m_2'] = defense(j1_val_y)
-            self.data_output['m_3'] = defense(j1_val_y)
-            self.data_output['m_4'] = defense((50 - j1_val_y))
-            self.data_output['m_5'] = defense((50 - j1_val_y))
-            self.data_output['m_6'] = defense((50 - j1_val_y))
-            self.data_output['m_7'] = defense((50 - j1_val_y))
+            self.data_output['m_0'] = defense(j1_val_y - (50 - j1_val_x) - (50 - j2_val_y) - (50 - j2_val_x))
+            self.data_output['m_1'] = defense(j1_val_y + (50 - j1_val_x) - (50 - j2_val_y) + (50 - j2_val_x))
+            self.data_output['m_2'] = defense(j1_val_y + (50 - j1_val_x) + (50 - j2_val_y) + (50 - j2_val_x))
+            self.data_output['m_3'] = defense(j1_val_y - (50 - j1_val_x) + (50 - j2_val_y) - (50 - j2_val_x))
+            self.data_output['m_4'] = defense(j1_val_y + (50 - j1_val_x) + (50 - j2_val_y) - (50 - j2_val_x))
+            self.data_output['m_5'] = defense(j1_val_y - (50 - j1_val_x) + (50 - j2_val_y) + (50 - j2_val_x))
+            self.data_output['m_6'] = defense(j1_val_y - (50 - j1_val_x) - (50 - j2_val_y) + (50 - j2_val_x))
+            self.data_output['m_7'] = defense(j1_val_y + (50 - j1_val_x) - (50 - j2_val_y) - (50 - j2_val_x))
 
             # отправка и прием сообщений
+            self.logi.debug(self.data_output)
             self.server.send_data(self.data_output)
 
             self.data_input = self.server.receiver_data()

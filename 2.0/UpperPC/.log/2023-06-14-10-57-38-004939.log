@@ -1,0 +1,17 @@
+2023-06-14 10:57:38,005 : INFO : Start logging
+2023-06-14 10:57:38,005 : INFO : ROV waiting for connection
+2023-06-14 10:57:44,069 : INFO : ROV Connected <socket.socket fd=1460, family=2, type=1, proto=0, laddr=('192.168.1.101', 3000), raddr=('192.168.1.100', 46610)>
+2023-06-14 10:57:44,152 : INFO : Controller PS4 init
+2023-06-14 10:57:44,152 : INFO : Main post init
+2023-06-14 10:57:44,152 : INFO : Controller PS4 listen
+2023-06-14 10:57:44,153 : INFO : Pult run
+2023-06-14 10:57:44,153 : DEBUG : Data pult: {'j1_val_y': 0, 'j1_val_x': 0, 'j2_val_y': 0, 'j2_val_x': 0, 'man': 0, 'servo_ñam': 90, 'led': 0}
+2023-06-14 10:57:44,165 : DEBUG : {'time': datetime.datetime(2023, 6, 14, 10, 57, 44, 152356), 'led': False, 'man': 0, 'servo_ñam': 90, 'm_0': 50, 'm_1': 50, 'm_2': 50, 'm_3': 50, 'm_4': 0, 'm_5': 0, 'm_6': 0, 'm_7': 0}
+2023-06-14 10:57:44,166 : DEBUG : Send data : {'time': datetime.datetime(2023, 6, 14, 10, 57, 44, 152356), 'led': False, 'man': 0, 'servo_ñam': 90, 'm_0': 50, 'm_1': 50, 'm_2': 50, 'm_3': 50, 'm_4': 0, 'm_5': 0, 'm_6': 0, 'm_7': 0}
+2023-06-14 10:57:44,191 : DEBUG : Receiver data : 
+2023-06-14 10:57:44,293 : DEBUG : Data pult: {'j1_val_y': 0, 'j1_val_x': 0, 'j2_val_y': 0, 'j2_val_x': 0, 'man': 0, 'servo_ñam': 90, 'led': 0}
+2023-06-14 10:57:44,293 : DEBUG : {'time': datetime.datetime(2023, 6, 14, 10, 57, 44, 152356), 'led': False, 'man': 0, 'servo_ñam': 90, 'm_0': 50, 'm_1': 50, 'm_2': 50, 'm_3': 50, 'm_4': 0, 'm_5': 0, 'm_6': 0, 'm_7': 0}
+2023-06-14 10:57:44,294 : DEBUG : Send data : {'time': datetime.datetime(2023, 6, 14, 10, 57, 44, 152356), 'led': False, 'man': 0, 'servo_ñam': 90, 'm_0': 50, 'm_1': 50, 'm_2': 50, 'm_3': 50, 'm_4': 0, 'm_5': 0, 'm_6': 0, 'm_7': 0}
+2023-06-14 10:57:44,294 : DEBUG : Receiver data : 
+2023-06-14 10:57:44,395 : DEBUG : Data pult: {'j1_val_y': 0, 'j1_val_x': 0, 'j2_val_y': 0, 'j2_val_x': 0, 'man': 0, 'servo_ñam': 90, 'led': 0}
+2023-06-14 10:57:44,395 : DEBUG : {'time': datetime.datetime(2023, 6, 14, 10, 57, 44, 152356), 'led': False, 'man': 0, 'servo_ñam': 90, 'm_0': 50, 'm_1': 50, 'm_2': 50, 'm_3': 50, 'm_4': 0, 'm_5': 0, 'm_6': 0, 'm_7': 0}

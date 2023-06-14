@@ -6,7 +6,7 @@ from datetime import datetime
 
 
 # запуск на одноплатном компьютере Raspberry pi4 
-PATH_CONFIG = '/home/rock/SoftProteus/2.0/MedianRaspberry/' 
+PATH_CONFIG = '/home/Prot/SoftProteus/2.0/MedianRaspberry/' 
 PATH_LOG = PATH_CONFIG + '.log/'
 
 
