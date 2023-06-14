@@ -35,13 +35,13 @@ class RovServer:
         #Прием информации с аппарата
         if self.check_connect:
             data = self.user_socket.recv(1024)
-            if len(data) == 0:
-                self.server.close()
-                self.check_connect = False
-                self.logi.info(f'ROV disconnection {self.user_socket}')
-                return None
+            # if len(data) == 0:
+            #     self.server.close()
+            #     self.check_connect = False
+            #     self.logi.info(f'ROV disconnection {self.user_socket}')
+            #     return None
 
-            data = dict(literal_eval(str(data.decode('utf-8'))))
+            data = str(data.decode('utf-8'))
             self.logi.debug(f'Receiver data : {str(data)}')
             return data
 

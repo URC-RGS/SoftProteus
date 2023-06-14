@@ -71,6 +71,8 @@ class MainApparat:
                 self.telemetry_lower = self.serial_port.receiver_data_new()
 
                 self.update_telemetry()
+                
+                self.logi.debug(self.telemetry)
                 self.client.send_data(self.telemetry)
         except:
             pass
