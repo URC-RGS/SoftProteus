@@ -43,15 +43,11 @@ class RovController():
 
         self.forward_back = float(self.joi_config['forward_back_defolt']) * 32767
 
-        self.cor_forward_back = float(self.joi_config['cor_forward_back_defolt'])
-
         self.min_value = float(self.joi_config['min_value'])
 
         self.move_forward_back = int(self.joi_config[self.joi_config['move_forward_back']])
 
         self.left_right = float(self.joi_config['left_right_defolt']) * 32767
-
-        self.cor_left_right = float(self.joi_config['cor_left_right_defolt'])
 
         self.move_left_right = int(self.joi_config[self.joi_config['move_left_right']])
 
@@ -59,13 +55,9 @@ class RovController():
 
         self.up_down = float(self.joi_config['up_down_defolt']) * 32767
 
-        self.cor_up_down = float(self.joi_config['cor_up_down_defolt'])
-
         self.move_turn_left_turn_righ = int(self.joi_config[self.joi_config['move_turn_left_turn_righ']])
 
         self.turn_left_turn_righ = float(self.joi_config['turn_left_turn_righ_defolt']) * 32767
-
-        self.cor_turn_left_turn_righ = float(self.joi_config['cor_turn_left_turn_righ_defolt'])
 
         self.reverse_forward_back = bool(util.strtobool(self.joi_config['reverse_forward_back']))
 

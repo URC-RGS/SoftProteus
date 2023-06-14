@@ -67,6 +67,7 @@ class MainApparat:
                     ]
                 
                 self.serial_port.send_data_new(lower_out)
+                
                 self.telemetry_lower = self.serial_port.receiver_data_new()
 
                 self.update_telemetry()
