@@ -111,6 +111,8 @@ class RovPost:
             j2_val_y = transformation(data['j2_val_y'])
             j2_val_x = transformation(data['j2_val_x'])
 
+
+
             # Подготовка массива для отправки на аппарат
             self.data_output['m_0'] = defense(j1_val_y - (50 - j1_val_x) - (50 - j2_val_y) - (50 - j2_val_x))
             self.data_output['m_1'] = defense(j1_val_y + (50 - j1_val_x) - (50 - j2_val_y) + (50 - j2_val_x))
