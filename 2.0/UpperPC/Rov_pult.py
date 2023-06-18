@@ -1,5 +1,4 @@
 import os
-import cv2
 import pyautogui
 import numpy as np
 import threading
