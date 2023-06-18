@@ -122,7 +122,9 @@ class RovPost:
             self.data_output['m_6'] = defense(j1_val_y - (50 - j1_val_x) - (50 - j2_val_y) + (50 - j2_val_x))
             self.data_output['m_7'] = defense(j1_val_y + (50 - j1_val_x) - (50 - j2_val_y) - (50 - j2_val_x))
 
-            # отправка и прием сообщений
+            # отправка и прием сообщенийcd
+            
+            
             self.logi.debug(self.data_output)
             self.server.send_data(self.data_output)
 

@@ -1,0 +1,17 @@
+2023-06-14 16:41:51,912 : INFO : Start logging
+2023-06-14 16:41:51,912 : INFO : ROV waiting for connection
+2023-06-14 16:42:02,962 : INFO : ROV Connected <socket.socket fd=1424, family=2, type=1, proto=0, laddr=('192.168.1.101', 3000), raddr=('192.168.1.100', 40626)>
+2023-06-14 16:42:03,859 : INFO : Controller PS4 init
+2023-06-14 16:42:03,860 : INFO : Main post init
+2023-06-14 16:42:03,861 : INFO : Controller PS4 listen
+2023-06-14 16:42:03,861 : INFO : Pult run
+2023-06-14 16:42:03,862 : DEBUG : Data pult: {'j1_val_y': 0, 'j1_val_x': 0, 'j2_val_y': 0, 'j2_val_x': 0, 'man': 0, 'servo_ñam': 90, 'led': 0}
+2023-06-14 16:42:03,900 : DEBUG : {'led': False, 'man': 0, 'servo_ñam': 90, 'm_0': 50, 'm_1': 50, 'm_2': 50, 'm_3': 50, 'm_4': 50, 'm_5': 50, 'm_6': 50, 'm_7': 50}
+2023-06-14 16:42:03,901 : DEBUG : Send data : {'led': False, 'man': 0, 'servo_ñam': 90, 'm_0': 50, 'm_1': 50, 'm_2': 50, 'm_3': 50, 'm_4': 50, 'm_5': 50, 'm_6': 50, 'm_7': 50}
+2023-06-14 16:42:03,902 : DEBUG : Receiver data : 
+2023-06-14 16:42:03,913 : DEBUG : Data pult: {'j1_val_y': 0, 'j1_val_x': 0, 'j2_val_y': 0, 'j2_val_x': 0, 'man': 0, 'servo_ñam': 90, 'led': 0}
+2023-06-14 16:42:03,914 : DEBUG : {'led': False, 'man': 0, 'servo_ñam': 90, 'm_0': 50, 'm_1': 50, 'm_2': 50, 'm_3': 50, 'm_4': 50, 'm_5': 50, 'm_6': 50, 'm_7': 50}
+2023-06-14 16:42:03,915 : DEBUG : Send data : {'led': False, 'man': 0, 'servo_ñam': 90, 'm_0': 50, 'm_1': 50, 'm_2': 50, 'm_3': 50, 'm_4': 50, 'm_5': 50, 'm_6': 50, 'm_7': 50}
+2023-06-14 16:42:03,916 : DEBUG : Receiver data : 
+2023-06-14 16:42:03,927 : DEBUG : Data pult: {'j1_val_y': 0, 'j1_val_x': 0, 'j2_val_y': 0, 'j2_val_x': 0, 'man': 0, 'servo_ñam': 90, 'led': 0}
+2023-06-14 16:42:03,927 : DEBUG : {'led': False, 'man': 0, 'servo_ñam': 90, 'm_0': 50, 'm_1': 50, 'm_2': 50, 'm_3': 50, 'm_4': 50, 'm_5': 50, 'm_6': 50, 'm_7': 50}

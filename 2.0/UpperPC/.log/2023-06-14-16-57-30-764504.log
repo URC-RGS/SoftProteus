@@ -1,0 +1,10 @@
+2023-06-14 16:57:30,765 : INFO : Start logging
+2023-06-14 16:57:30,765 : INFO : ROV waiting for connection
+2023-06-14 16:57:32,230 : INFO : ROV Connected <socket.socket fd=1336, family=2, type=1, proto=0, laddr=('192.168.1.101', 3000), raddr=('192.168.1.100', 58060)>
+2023-06-14 16:57:33,132 : INFO : Controller PS4 init
+2023-06-14 16:57:33,133 : INFO : Main post init
+2023-06-14 16:57:33,134 : INFO : Controller PS4 listen
+2023-06-14 16:57:33,134 : INFO : Pult run
+2023-06-14 16:57:33,134 : DEBUG : Data pult: {'j1_val_y': 0, 'j1_val_x': 0, 'j2_val_y': 0, 'j2_val_x': 0, 'man': 0, 'servo_ñam': 90, 'led': 0}
+2023-06-14 16:57:33,172 : DEBUG : {'led': False, 'man': 0, 'servo_ñam': 90, 'm_0': 50, 'm_1': 50, 'm_2': 50, 'm_3': 50, 'm_4': 50, 'm_5': 50, 'm_6': 50, 'm_7': 50}
+2023-06-14 16:57:33,173 : DEBUG : Send data : {'led': False, 'man': 0, 'servo_ñam': 90, 'm_0': 50, 'm_1': 50, 'm_2': 50, 'm_3': 50, 'm_4': 50, 'm_5': 50, 'm_6': 50, 'm_7': 50}
