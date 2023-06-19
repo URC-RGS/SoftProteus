@@ -1,7 +1,4 @@
-import os
-import pyautogui
-import numpy as np
-import threading
+import sys
 from datetime import datetime
 from distutils import util
 from configparser import ConfigParser
@@ -9,15 +6,23 @@ from PyQt5 import QtCore
 from RovCommunication import RovServer
 from RovLogging import RovLogger
 from RovControl import RovController
+from PyQt5.QtWidgets import QApplication, QMainWindow
+from design import *
+
 
 
 # запуск на ноутбуке 
-PATH_CONFIG = 'C:/Users/Yarik/Documents/SoftProteus/2.0/UpperPC/'
+PATH_CONFIG = '/home/yarik/Документы/SoftProteus/UpperPC-GUI/'
 PATH_LOG = PATH_CONFIG + '.log/'
 
 
-class RovPost:
+class RovPultServer(QtCore.QObject):
+
+    commandserver = QtCore.pyqtSignal(dict)
+
     def __init__(self):
+        super().__init__()
+
         # считываем конфиг
         self.config = ConfigParser()
         self.config.read(PATH_CONFIG + 'config_pult.ini')
@@ -82,7 +87,11 @@ class RovPost:
         #запуск на прослушивание контроллера ps4
         self.controll_ps4.listen()
 
+
     def run_command(self):
+
+        self.server.listen_to_connection()
+
         self.logi.info('Pult run')
 
         def transformation(value: int):
@@ -99,7 +108,6 @@ class RovPost:
             return value
 
         while True:
-            # запрос данный из класса пульта (потенциально слабое место)
             data = self.data_pult
 
             # математика преобразования значений с джойстика в значения для моторов
@@ -110,8 +118,6 @@ class RovPost:
             j1_val_x = transformation(data['j1_val_x'])
             j2_val_y = transformation(data['j2_val_y'])
             j2_val_x = transformation(data['j2_val_x'])
-
-
 
             # Подготовка массива для отправки на аппарат
             self.data_output['m_0'] = defense(j1_val_y - (50 - j1_val_x) - (50 - j2_val_y) - (50 - j2_val_x))
@@ -124,11 +130,8 @@ class RovPost:
             self.data_output['m_7'] = defense(j1_val_y + (50 - j1_val_x) - (50 - j2_val_y) - (50 - j2_val_x))
 
             # отправка и прием сообщенийcd
-            
-            
             self.logi.debug(self.data_output)
             self.server.send_data(self.data_output)
-
             self.data_input = self.server.receiver_data()
 
             # Проверка условия убийства сокета
@@ -139,15 +142,98 @@ class RovPost:
 
             QtCore.QThread.msleep(self.rate_command_out)
 
-    def run_main(self):
-        '''запуск процессов опроса джойстика и основного цикла программы'''
-        self.thread_joi = threading.Thread(target=self.run_controller)
-        self.thread_com = threading.Thread(target=self.run_command)
 
-        self.thread_joi.start()
-        self.thread_com.start()
+class ApplicationGUI(QMainWindow, Ui_UpperPCGUI):
+    def __init__(self):
+        # импорт и создание интерфейса
+        super().__init__()
+        self.setupUi(self)
+
+        self.button_connect.clicked.connect(self.connect)
+        self.button_disconnect.clicked.connect(self.disconnect)
+        self.button_apply.clicked.connect(self.apply)
+        self.updategui({})
+
+        # создание потоков и привязка
+        self.thread = QtCore.QThread()
+        
+    def read(self):
+        # TODO доделать подтягивание из конфиг файла 
+        pass
+
+    def connect(self):
+        host = self.host_value.text()
+        port = self.port_value.text()
+        print(host, port)
+        self.start_server()
+
+    def disconnect(self):
+        self.threadserver.server.server.close()
+        self.thread.terminate()
+
+        
+    def apply(self):
+        #f_b_set = self.f_b_set.value()
+        f_b_value = self.f_b_value.value()
+        #l_r_set = self.l_r_set.value()
+        l_r_value = self.l_r_value.value()
+        #u_d_set = self.u_d_set.value()
+        u_d_value = self.u_d_value.value()
+        #tl_tr_set = self.tl_tr_set.value()
+        tl_tr_value = self.tl_tr_value.value()
+
+        #camera_up_set = self.camera_up_set.value()
+        #camera_down_set = self.camera_dowm_set.value()
+
+        #arm_up_set = self.arm_up_set.value()
+        #arm_down_set = self.arm_down_set.value()
+
+        #led_on_set = self.led_on_set.value()
+        #led_off_set = self.led_off_set.value()
+
+        print(f_b_value, l_r_value, u_d_value, tl_tr_value)
+
+
+    def start_server(self):
+        # запуск сервера
+        self.threadserver = RovPultServer()
+        self.threadserver.moveToThread(self.thread)
+        self.threadserver.commandserver.connect(self.updategui)
+        self.thread.started.connect(self.threadserver.run_command)
+        self.thread.start()
+        print(12233)
+
+    def start_joi(self):
+        # self.threadJoi = threading.Thread(target=self.threadserver.run_controller)
+        # self.threadJoi.start()
+        pass
+
+    @QtCore.pyqtSlot()
+    def updategui(self, dataMass):
+
+        self.term_value.display(1)
+        self.depth_value.display(2)
+        self.orientation_value.display(3)
+
+        self.angle_x_value.display(4)
+        self.angle_y_value.display(5)
+        self.angle_z_value.display(6)
+
+        self.amperage_value.display(7)
+        self.voltage_value.display(8)
+        self.charge_value.display(9)
+
+
+class RovPost:
+    def __init__(self):
+        self.app = QApplication(sys.argv)
+        self.ex = ApplicationGUI()
+
+    def ShowApplication(self):
+        self.ex.show()
+        sys.exit(self.app.exec_())
 
 
 if __name__ == '__main__':
-    post = RovPost()
-    post.run_main()
+    application = RovPost()
+    application.ShowApplication()

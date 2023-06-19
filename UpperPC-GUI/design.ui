@@ -45,7 +45,7 @@
        <enum>QTabWidget::West</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="Main">
        <attribute name="title">
@@ -55,7 +55,7 @@
         <item row="6" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="QLabel" name="label_2">
+           <widget class="QLabel" name="temp_label">
             <property name="layoutDirection">
              <enum>Qt::LeftToRight</enum>
             </property>
@@ -74,10 +74,14 @@
            </widget>
           </item>
           <item>
-           <widget class="QLCDNumber" name="term_value"/>
+           <widget class="QLCDNumber" name="term_value">
+            <property name="smallDecimalPoint">
+             <bool>false</bool>
+            </property>
+           </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label">
+           <widget class="QLabel" name="depth_label">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600; color:#00aaff;&quot;&gt;Depth&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -93,7 +97,7 @@
            <widget class="QLCDNumber" name="depth_value"/>
           </item>
           <item>
-           <widget class="QLabel" name="label_3">
+           <widget class="QLabel" name="orientation_label">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600; color:#00aaff;&quot;&gt;Orientation&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -119,7 +123,7 @@
         <item row="8" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
-           <widget class="QLabel" name="label_4">
+           <widget class="QLabel" name="angle_x_label">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600; color:#00aaff;&quot;&gt;Angle X&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -129,7 +133,7 @@
            <widget class="QLCDNumber" name="angle_x_value"/>
           </item>
           <item>
-           <widget class="QLabel" name="label_5">
+           <widget class="QLabel" name="angle_y_label">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600; color:#00aaff;&quot;&gt;Angle Y&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -139,7 +143,7 @@
            <widget class="QLCDNumber" name="angle_y_value"/>
           </item>
           <item>
-           <widget class="QLabel" name="label_7">
+           <widget class="QLabel" name="angle_z_label">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600; color:#00aaff;&quot;&gt;Angle Z&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -151,7 +155,7 @@
          </layout>
         </item>
         <item row="9" column="0">
-         <widget class="Line" name="line_2">
+         <widget class="Line" name="line_1">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -175,7 +179,7 @@
         <item row="10" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <widget class="QLabel" name="label_8">
+           <widget class="QLabel" name="amperage_label">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600; color:#00aaff;&quot;&gt;Amperage&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -185,7 +189,7 @@
            <widget class="QLCDNumber" name="amperage_value"/>
           </item>
           <item>
-           <widget class="QLabel" name="label_9">
+           <widget class="QLabel" name="voltage_label">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600; color:#00aaff;&quot;&gt;Voltage&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -195,7 +199,7 @@
            <widget class="QLCDNumber" name="voltage_value"/>
           </item>
           <item>
-           <widget class="QLabel" name="label_10">
+           <widget class="QLabel" name="charge_label">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600; color:#00aaff;&quot;&gt;Сharge&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -207,7 +211,7 @@
          </layout>
         </item>
         <item row="7" column="0">
-         <widget class="Line" name="line">
+         <widget class="Line" name="line_0">
           <property name="enabled">
            <bool>true</bool>
           </property>
@@ -250,7 +254,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_3">
+      <widget class="QWidget" name="Settings">
        <attribute name="title">
         <string>Settings</string>
        </attribute>
@@ -258,14 +262,14 @@
         <item row="9" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_11">
           <item>
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QPushButton" name="button_connect">
             <property name="text">
              <string>Connect</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_3">
+           <widget class="QPushButton" name="button_disconnect">
             <property name="text">
              <string>Disconnect</string>
             </property>
@@ -276,14 +280,14 @@
         <item row="2" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_7">
           <item>
-           <widget class="QLabel" name="label_11">
+           <widget class="QLabel" name="cam_up_label">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#00aaff;&quot;&gt;Camera Up</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="camera_up_value">
+           <widget class="QComboBox" name="camera_up_set">
             <item>
              <property name="text">
               <string>Circle</string>
@@ -327,14 +331,14 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_12">
+           <widget class="QLabel" name="camera_down_label">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#00aaff;&quot;&gt;Camera Down</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="camera_dowm_value">
+           <widget class="QComboBox" name="camera_dowm_set">
             <item>
              <property name="text">
               <string>Circle</string>
@@ -382,28 +386,28 @@
         <item row="6" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_8">
           <item>
-           <widget class="QLabel" name="host">
+           <widget class="QLabel" name="host_label">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#00aaff;&quot;&gt;HOST&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="HOST_Edit">
+           <widget class="QLineEdit" name="host_value">
             <property name="text">
              <string>127.0.0.1</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="port">
+           <widget class="QLabel" name="port_label">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#00aaff;&quot;&gt;PORT&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="PORT_Edit">
+           <widget class="QLineEdit" name="port_value">
             <property name="text">
              <string>3000</string>
             </property>
@@ -414,7 +418,7 @@
         <item row="1" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_6">
           <item>
-           <widget class="QLabel" name="lJoistikLY">
+           <widget class="QLabel" name="l_r_label">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#00aaff;&quot;&gt;Left \ Right&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -424,7 +428,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox_2">
+           <widget class="QComboBox" name="l_r_set">
             <item>
              <property name="text">
               <string>lx</string>
@@ -448,7 +452,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QDoubleSpinBox" name="joistik_ly_value">
+           <widget class="QDoubleSpinBox" name="l_r_value">
             <property name="minimum">
              <double>-1.000000000000000</double>
             </property>
@@ -464,14 +468,14 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="JoistikRY">
+           <widget class="QLabel" name="tl_tr_label">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#00aaff;&quot;&gt;Turn left \ Turn righ&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox_4">
+           <widget class="QComboBox" name="tl_tr_set">
             <item>
              <property name="text">
               <string>lx</string>
@@ -495,7 +499,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QDoubleSpinBox" name="joistik_ry_value">
+           <widget class="QDoubleSpinBox" name="tl_tr_value">
             <property name="minimum">
              <double>-1.000000000000000</double>
             </property>
@@ -515,7 +519,7 @@
         <item row="0" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_5">
           <item>
-           <widget class="QLabel" name="label_6">
+           <widget class="QLabel" name="f_b_label">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#00aaff;&quot;&gt;Forward \ Back&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -525,7 +529,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox">
+           <widget class="QComboBox" name="f_b_set">
             <property name="placeholderText">
              <string/>
             </property>
@@ -552,7 +556,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QDoubleSpinBox" name="joistik_lx_value">
+           <widget class="QDoubleSpinBox" name="f_b_value">
             <property name="minimum">
              <double>-1.000000000000000</double>
             </property>
@@ -568,7 +572,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="JoistikRX">
+           <widget class="QLabel" name="u_d_label">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#00aaff;&quot;&gt;Up \ Down&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -578,7 +582,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox_3">
+           <widget class="QComboBox" name="u_d_set">
             <item>
              <property name="text">
               <string>lx</string>
@@ -602,7 +606,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QDoubleSpinBox" name="joistik_rx_value">
+           <widget class="QDoubleSpinBox" name="u_d_value">
             <property name="minimum">
              <double>-1.000000000000000</double>
             </property>
@@ -622,14 +626,14 @@
         <item row="4" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_10">
           <item>
-           <widget class="QLabel" name="label_15">
+           <widget class="QLabel" name="led_on_label">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#00aaff;&quot;&gt;Led On</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox_9">
+           <widget class="QComboBox" name="led_on_set">
             <item>
              <property name="text">
               <string>Circle</string>
@@ -673,14 +677,14 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_16">
+           <widget class="QLabel" name="led_off_label">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#00aaff;&quot;&gt;Led Off</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox_10">
+           <widget class="QComboBox" name="led_off_set">
             <item>
              <property name="text">
               <string>Circle</string>
@@ -728,14 +732,14 @@
         <item row="3" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_9">
           <item>
-           <widget class="QLabel" name="label_13">
+           <widget class="QLabel" name="arm_up_label">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#00aaff;&quot;&gt;Arm Up</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox_7">
+           <widget class="QComboBox" name="arm_up_set">
             <item>
              <property name="text">
               <string>Circle</string>
@@ -779,14 +783,14 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_14">
+           <widget class="QLabel" name="arm_down_label">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#00aaff;&quot;&gt;Arm Down</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox_8">
+           <widget class="QComboBox" name="arm_down_set">
             <item>
              <property name="text">
               <string>Circle</string>
@@ -834,16 +838,16 @@
         <item row="5" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_12">
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="button_read">
             <property name="text">
              <string>Read</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_4">
+           <widget class="QPushButton" name="button_apply">
             <property name="text">
-             <string>Save</string>
+             <string>Apply</string>
             </property>
            </widget>
           </item>
