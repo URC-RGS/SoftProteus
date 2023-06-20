@@ -7,23 +7,14 @@ import serial
 
 
 class RovServer:
-    def __init__(self):
-        '''Класс отвечающий за создание сервера'''
-
-        
-            
-        # настройка сервера
-       
-
+    '''Класс сервера TCP'''
     def listen_to_connection(self, server_config: dict):
-        print(12345)
         self.logi = server_config['logger']
         self.host = server_config['host']
         self.port = server_config['port']
 
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM,)
         self.server.bind((self.host, self.port))
-        self.server.settimeout(5)
         self.logi.info('ROV waiting for connection')
         self.server.listen(1)
         self.user_socket, self.address = self.server.accept()
@@ -34,13 +25,13 @@ class RovServer:
         #Прием информации с аппарата
         if self.check_connect:
             data = self.user_socket.recv(1024)
-            # if len(data) == 0:
-            #     self.server.close()
-            #     self.check_connect = False
-            #     self.logi.info(f'ROV disconnection {self.user_socket}')
-            #     return None
+            if len(data) == 0:
+                self.server.close()
+                self.check_connect = False
+                self.logi.info(f'ROV disconnection {self.user_socket}')
+                return None
 
-            data = str(data.decode('utf-8'))
+            data = dict(literal_eval(str(data.decode('utf-8'))))
             self.logi.debug(f'Receiver data : {str(data)}')
             return data
 
@@ -49,6 +40,7 @@ class RovServer:
         if self.check_connect:
             self.user_socket.send(str(data).encode('utf-8'))
             self.logi.debug(f'Send data : {str(data)}')
+
 
 
 class RovClient:
@@ -73,7 +65,7 @@ class RovClient:
     def receiver_data(self):
         #Прием информации с поста управления 
         if self.check_connect:
-            data = self.client.recv(512).decode('utf-8')
+            data = self.client.recv(512)
 
             if len(data) == 0:
                 self.check_connect = False
@@ -81,15 +73,13 @@ class RovClient:
                 self.client.close()
                 return None
 
-            data = dict(literal_eval(str(data)))
+            data = dict(literal_eval(str(data.decode('utf-8'))))
             self.logi.debug(f'Receiver data : {str(data)}')
             return data
 
     def send_data(self, data:dict):
         #Функция для  отправки пакетов на пульт 
         if self.check_connect:
-            data['time'] = str(datetime.now())
-
             self.logi.debug(f'Send data : {str(data)}')
 
             data_output = str(data).encode("utf-8")
@@ -123,21 +113,59 @@ class Rov_SerialPort:
 
         try:
             self.logi.debug(f'Receiver data: {str(data)}')
+            
             mass_data = str(data)[3:-4].split(', ')
-            dataout = list(map(lambda x: float(x), mass_data[:-1])) + [mass_data[-1]]
+            
+            dataout = list(map(lambda x: float(x), mass_data[:-1]))
 
         except:
             self.logi.warning('Error converting data')
             return None
 
         return dataout
+    
+    def receiver_data_new(self):
+        #прием информации с аппарата
+        data = None
 
-    def send_data(self, data: list = [50, 50, 50, 50, 50, 50, 90, 0, 0, 0]):
+        while data == None or data == b'':
+            data = self.serial_port.readline()
+
+        try:
+            self.logi.debug(f'Receiver data: {str(data)}')
+            
+            # print(str(data))
+            
+            # mass_data = str(data)[2:-3].split(', ')
+            
+            # dataout = list(map(lambda x: float(x), mass_data[:-1]))
+
+        except:
+            self.logi.warning('Error converting data')
+            return None
+
+        return data
+
+    def send_data(self, data: list = [50, 50, 50, 50, 50, 50, 50, 50, 90, 90, 0, 0]):
         #отправка массива на аппарат
         try:
-            self.serial_port.write((f'{str(data)}\n').encode())
+            data = (f'{str(data)}\n').encode()
+            
+            self.serial_port.write(data)
 
-            self.logi.debug(f'Send data: {str(data)}')
+            self.logi.debug(f'Send data: {data}')
+
+        except:
+            self.logi.warning('Error send data')
+    
+    def send_data_new(self, data: list = [50, 50, 50, 50, 50, 50, 50, 50, 90, 90, 0, 0]):
+        #отправка массива на аппарат
+        try:
+            data = (f'{str(data)[1:-1]}\n').encode()
+            
+            self.serial_port.write(data)
+
+            self.logi.debug(f'Send data: {data}')
 
         except:
             self.logi.warning('Error send data')
@@ -156,18 +184,17 @@ class Rov_SerialPort_Gebag:
 
         self.logi.info(f'Serial port init: {serial_config}')
 
-    def receiver_data(self):
-        #прием информации с аппарата
+    def receiver_data_new(self):
+        # псевдо прием информации с аппарата
         
         data = [12.6,randint(0,2), randint(25,27), randint(0,5), randint(180,210)]
 
         self.logi.debug(f'Receiver data : {str(data)}')
             
-        return data
+        return str(data)
 
-    def send_data(self, data: list = [50, 50, 50, 50, 50, 50, 90, 0, 0, 0]):
-        #отправка массива на аппарат
+    def send_data_new(self, data: list = [50, 50, 50, 50, 50, 50, 90, 0, 0, 0]):
+        #псевдо отправка массива на аппарат
 
         self.logi.debug(f'Send data: {str(data)}')
-
 

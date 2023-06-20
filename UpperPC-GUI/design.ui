@@ -283,42 +283,42 @@
            <widget class="QComboBox" name="camera_up_set">
             <item>
              <property name="text">
-              <string>Circle</string>
+              <string>circle</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Square</string>
+              <string>square</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Triangle</string>
+              <string>triangle</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Share</string>
+              <string>x</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>L1</string>
+              <string>l1</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>L2</string>
+              <string>l2</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>R1</string>
+              <string>r1</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>R2</string>
+              <string>r2</string>
              </property>
             </item>
            </widget>
@@ -334,42 +334,42 @@
            <widget class="QComboBox" name="camera_dowm_set">
             <item>
              <property name="text">
-              <string>Circle</string>
+              <string>circle</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Square</string>
+              <string>square</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Triangle</string>
+              <string>triangle</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Share</string>
+              <string>x</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>L!</string>
+              <string>l1</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>L2</string>
+              <string>l2</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>R1</string>
+              <string>r1</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>R2</string>
+              <string>r2</string>
              </property>
             </item>
            </widget>
@@ -629,42 +629,42 @@
            <widget class="QComboBox" name="led_on_set">
             <item>
              <property name="text">
-              <string>Circle</string>
+              <string>circle</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Square</string>
+              <string>square</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Triangle</string>
+              <string>triangle</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Share</string>
+              <string>x</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>L1</string>
+              <string>l1</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>L2</string>
+              <string>l2</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>R1</string>
+              <string>r1</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>R2</string>
+              <string>r2</string>
              </property>
             </item>
            </widget>
@@ -680,42 +680,42 @@
            <widget class="QComboBox" name="led_off_set">
             <item>
              <property name="text">
-              <string>Circle</string>
+              <string>circle</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Square </string>
+              <string>square </string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Triangle</string>
+              <string>triangle</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Share</string>
+              <string>x</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>L1</string>
+              <string>l1</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>L2</string>
+              <string>l2</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>R1</string>
+              <string>r1</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>R2</string>
+              <string>r2</string>
              </property>
             </item>
            </widget>
@@ -735,42 +735,42 @@
            <widget class="QComboBox" name="arm_up_set">
             <item>
              <property name="text">
-              <string>Circle</string>
+              <string>circle</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Square</string>
+              <string>square</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Triangle</string>
+              <string>triangle</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Share</string>
+              <string>x</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>L1</string>
+              <string>l1</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>L2</string>
+              <string>l2</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>R1</string>
+              <string>r1</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>R2</string>
+              <string>r2</string>
              </property>
             </item>
            </widget>
@@ -786,42 +786,42 @@
            <widget class="QComboBox" name="arm_down_set">
             <item>
              <property name="text">
-              <string>Circle</string>
+              <string>circle</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Square</string>
+              <string>square</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Triangle</string>
+              <string>triangle</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Share</string>
+              <string>x</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>L1</string>
+              <string>l1</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>L2</string>
+              <string>l2</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>R1</string>
+              <string>r1</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>R2</string>
+              <string>r2</string>
              </property>
             </item>
            </widget>

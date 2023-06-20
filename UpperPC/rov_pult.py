@@ -12,7 +12,7 @@ from RovControl import RovController
 
 
 # запуск на ноутбуке 
-PATH_CONFIG = 'C:/Users/Yarik/Documents/SoftProteus/2.0/UpperPC/'
+PATH_CONFIG = '/home/yarik/Документы/SoftProteus/UpperPC/'
 PATH_LOG = PATH_CONFIG + '.log/'
 
 

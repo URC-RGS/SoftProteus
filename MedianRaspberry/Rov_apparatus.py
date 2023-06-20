@@ -42,12 +42,18 @@ class MainApparat:
         self.telemetry = {'date': str(datetime.now())}
         
         
-    def update_telemetry(self):
+    def update_telemetry(self, tel:str):
+        tel = tel[1:-1].split(',')
+        for i in range(len(tel)):
+             tel[i] = tel[i].strip()
+
         self.telemetry = {'date': str(datetime.now()),
-                          'volt': 0,
-                          'amp': 0,
-                          'depth': 0,
-                          'temp': 0
+                          'volt': float(tel[0]),
+                          'amp': int(tel[1]),
+                          'term': int(tel[2]),
+                          'depth': int(tel[3]),
+                          'orientation': int(tel[4]),
+
                           }
 
 
@@ -59,7 +65,7 @@ class MainApparat:
                 if data_in != None:
                     self.controllmass = data_in  # прием информации с поста управления
                 else:
-                    continue
+                    break
             
                 lower_out = [
                     self.controllmass['m_0'],
@@ -76,7 +82,7 @@ class MainApparat:
                 
                 self.telemetry_lower = self.serial_port.receiver_data_new()
 
-                self.update_telemetry()
+                self.update_telemetry(self.telemetry_lower)
                 
                 self.logi.debug(self.telemetry)
                 self.client.send_data(self.telemetry)

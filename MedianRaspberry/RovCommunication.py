@@ -7,34 +7,24 @@ import serial
 
 
 class RovServer:
-    def __init__(self, server_config: dict):
-        '''Класс отвечающий за создание сервера'''
-
+    '''Класс сервера TCP'''
+    def listen_to_connection(self, server_config: dict):
         self.logi = server_config['logger']
-        
-        # выбор режима: Отладка\Запуск на реальном аппарате
-        if server_config['local_host_start']:
-            self.host = server_config['local_host']
-            self.port = server_config['port_local_host']
-        else:
-            self.host = server_config['real_host']
-            self.port = server_config['port_real_host']
-            
-            
-        # настройка сервера
+        self.host = server_config['host']
+        self.port = server_config['port']
+
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM,)
         self.server.bind((self.host, self.port))
         self.logi.info('ROV waiting for connection')
         self.server.listen(1)
         self.user_socket, self.address = self.server.accept()
         self.check_connect = True
-
         self.logi.info(f'ROV Connected {self.user_socket}')
 
     def receiver_data(self):
         #Прием информации с аппарата
         if self.check_connect:
-            data = self.user_socket.recv(512)
+            data = self.user_socket.recv(1024)
             if len(data) == 0:
                 self.server.close()
                 self.check_connect = False
@@ -50,6 +40,7 @@ class RovServer:
         if self.check_connect:
             self.user_socket.send(str(data).encode('utf-8'))
             self.logi.debug(f'Send data : {str(data)}')
+
 
 
 class RovClient:
@@ -194,17 +185,16 @@ class Rov_SerialPort_Gebag:
         self.logi.info(f'Serial port init: {serial_config}')
 
     def receiver_data_new(self):
-        #прием информации с аппарата
+        # псевдо прием информации с аппарата
         
         data = [12.6,randint(0,2), randint(25,27), randint(0,5), randint(180,210)]
 
         self.logi.debug(f'Receiver data : {str(data)}')
             
-        return data
+        return str(data)
 
     def send_data_new(self, data: list = [50, 50, 50, 50, 50, 50, 90, 0, 0, 0]):
-        #отправка массива на аппарат
+        #псевдо отправка массива на аппарат
 
         self.logi.debug(f'Send data: {str(data)}')
-
 

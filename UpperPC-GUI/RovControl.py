@@ -4,8 +4,10 @@ from distutils import util
 from PyQt5 import QtCore
 
 
-class RovController():
+class RovController(QtCore.QObject):
+    '''Класс опроса джойстика'''
     def __init__(self, config):
+        super().__init__()
 
         os.environ["SDL_VIDEODRIVER"] = "dummy"
 
@@ -22,8 +24,8 @@ class RovController():
 
         self.logi = config['logger']
 
-        self.data_pult = {'j1_val_y': 0, 'j1_val_x': 0,
-                         'j2_val_y': 0, 'j2_val_x': 0,
+        self.data_pult = {'ly': 0, 'lx': 0,
+                         'ry': 0, 'rx': 0,
                          'man': 0, 'servo_сam': 90,
                          'led': 0}
         
@@ -35,29 +37,29 @@ class RovController():
 
         self.arm_down =  int(self.joi_config[self.joi_config['arm_down']])
 
-        self.led_up = int(self.joi_config[self.joi_config['led_up']])
+        self.led_on = int(self.joi_config[self.joi_config['led_on']])
 
-        self.led_down = int(self.joi_config[self.joi_config['led_down']])
+        self.led_off = int(self.joi_config[self.joi_config['led_off']])
 
         self.sleep_listen = int(self.joi_config['time_sleep_joi'])
 
-        self.forward_back = float(self.joi_config['forward_back_defolt']) * 32767
+        self.forward_back = float(self.joi_config['forward_back_power']) * 32767
 
         self.min_value = float(self.joi_config['min_value'])
 
         self.move_forward_back = int(self.joi_config[self.joi_config['move_forward_back']])
 
-        self.left_right = float(self.joi_config['left_right_defolt']) * 32767
+        self.left_right = float(self.joi_config['left_right_power']) * 32767
 
         self.move_left_right = int(self.joi_config[self.joi_config['move_left_right']])
 
         self.move_up_down = int(self.joi_config[self.joi_config['move_up_down']])
 
-        self.up_down = float(self.joi_config['up_down_defolt']) * 32767
+        self.up_down = float(self.joi_config['up_down_power']) * 32767
 
         self.move_turn_left_turn_righ = int(self.joi_config[self.joi_config['move_turn_left_turn_righ']])
 
-        self.turn_left_turn_righ = float(self.joi_config['turn_left_turn_righ_defolt']) * 32767
+        self.turn_left_turn_righ = float(self.joi_config['turn_left_turn_righ_power']) * 32767
 
         self.reverse_forward_back = bool(util.strtobool(self.joi_config['reverse_forward_back']))
 
@@ -97,10 +99,10 @@ class RovController():
                     if event.button == self.arm_down:
                         self.data_pult['man'] = 0
 
-                    if event.button == self.led_up:
+                    if event.button == self.led_on:
                         self.data_pult['led'] = 1
 
-                    if event.button == self.led_down:
+                    if event.button == self.led_off:
                          self.data_pult['led'] = 0
                     
                 if event.type == pygame.JOYBUTTONUP:
@@ -114,46 +116,46 @@ class RovController():
                 if event.type == pygame.JOYAXISMOTION:
                     if event.axis == self.move_forward_back:
                         if abs(round(event.value, 3)) >= self.min_value and self.reverse_forward_back:
-                            self.data_pult['j1_val_y'] = int(round(event.value, 2) * self.forward_back * -1)
+                            self.data_pult['ly'] = int(round(event.value, 2) * self.forward_back * -1)
                                 
                         elif abs(round(event.value, 3)) >= self.min_value and not self.reverse_forward_back:
-                            self.data_pult['j1_val_y'] = int(round(event.value, 2) * self.forward_back)
+                            self.data_pult['ly'] = int(round(event.value, 2) * self.forward_back)
                             
                         else:
-                            self.data_pult['j1_val_y'] = 0
+                            self.data_pult['ly'] = 0
 
                     if event.axis == self.move_left_right:
                         if abs(round(event.value, 3)) >= self.min_value and self.reverse_left_right:
-                            self.data_pult['j1_val_x'] = int(round(event.value, 2) * self.left_right * -1)
+                            self.data_pult['lx'] = int(round(event.value, 2) * self.left_right * -1)
 
                         elif abs(round(event.value, 3)) >= self.min_value and not self.reverse_left_right:
-                            self.data_pult['j1_val_x'] = int(round(event.value, 2) * self.left_right)
+                            self.data_pult['lx'] = int(round(event.value, 2) * self.left_right)
                        
                         else:
-                            self.data_pult['j1_val_x'] = 0
+                            self.data_pult['lx'] = 0
 
                     if event.axis == self.move_up_down:
                         if abs(round(event.value, 3)) >= self.min_value and self.reverse_up_down:
-                            self.data_pult['j2_val_y'] = int(round(event.value, 2) * self.up_down * -1)
+                            self.data_pult['ry'] = int(round(event.value, 2) * self.up_down * -1)
 
                         elif abs(round(event.value, 3)) >= self.min_value and not self.reverse_up_down:
-                            self.data_pult['j2_val_y'] = int(round(event.value, 2) * self.up_down)
+                            self.data_pult['ry'] = int(round(event.value, 2) * self.up_down)
                             
                         else:
-                            self.data_pult['j2_val_y'] = 0
+                            self.data_pult['ry'] = 0
 
                     if event.axis == self.move_turn_left_turn_righ:
                         if abs(round(event.value, 3)) >= self.min_value and self.reverse_turn_left_turn_righ:
-                            self.data_pult['j2_val_x'] = int(round(event.value, 2) * self.turn_left_turn_righ * -1)
+                            self.data_pult['rx'] = int(round(event.value, 2) * self.turn_left_turn_righ * -1)
 
                         elif abs(round(event.value, 3)) >= self.min_value and not self.reverse_turn_left_turn_righ:
-                            self.data_pult['j2_val_x'] = int(round(event.value, 2) * self.turn_left_turn_righ)
+                            self.data_pult['rx'] = int(round(event.value, 2) * self.turn_left_turn_righ)
                             
                         else:
-                            self.data_pult['j2_val_x'] = 0
+                            self.data_pult['rx'] = 0
 
                 else:
-                    self.data_pult['j1_val_y'], self.data_pult['j2_val_y'], self.data_pult['j1_val_x'], self.data_pult['j2_val_x'] = 0, 0, 0, 0
+                    self.data_pult['ly'], self.data_pult['ry'], self.data_pult['lx'], self.data_pult['rx'] = 0, 0, 0, 0
 
                 # повторная инициализация джойстика после отключения
                 joysticks = []
