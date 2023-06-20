@@ -1,5 +1,0 @@
-2023-06-19 10:28:34,709 : INFO : Start logging
-2023-06-19 10:28:34,709 : INFO : ROV waiting for connection
-2023-06-19 10:29:35,393 : INFO : ROV Connected <socket.socket fd=21, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 2000), raddr=('127.0.0.1', 36768)>
-2023-06-19 10:29:35,413 : INFO : Controller PS4 init
-2023-06-19 10:29:35,414 : INFO : Main post init

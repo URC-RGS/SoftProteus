@@ -1,6 +1,6 @@
 from configparser import ConfigParser
 from distutils import util
-from RovCommunication import RovClient, Rov_SerialPort
+from RovCommunication import RovClient, Rov_SerialPort, Rov_SerialPort_Gebag
 from RovLogging import RovLogger
 from datetime import datetime
 
@@ -37,17 +37,22 @@ class MainApparat:
                                     'bitrate': int(self.config['Rov']['bitrate']),
                                     'timeout': float(self.config['Rov']['timeout'])
                                     }
-        self.serial_port = Rov_SerialPort(self.serial_port_config)
+        self.serial_port = Rov_SerialPort_Gebag(self.serial_port_config)
         
         self.telemetry = {'date': str(datetime.now())}
         
         
     def update_telemetry(self):
-        self.telemetry = {'date': str(datetime.now())}
+        self.telemetry = {'date': str(datetime.now()),
+                          'volt': 0,
+                          'amp': 0,
+                          'depth': 0,
+                          'temp': 0
+                          }
 
 
     def RunMainApparat(self):
-        try:
+        # try:
             while True:
                 data_in = self.client.receiver_data()
                 self.logi.debug(data_in)
@@ -75,8 +80,8 @@ class MainApparat:
                 
                 self.logi.debug(self.telemetry)
                 self.client.send_data(self.telemetry)
-        except:
-            pass
+        # except:
+        #     pass
 
 
 if __name__ == '__main__':

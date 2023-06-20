@@ -74,7 +74,7 @@ class RovClient:
     def receiver_data(self):
         #Прием информации с поста управления 
         if self.check_connect:
-            data = self.client.recv(512).decode('utf-8')
+            data = self.client.recv(512)
 
             if len(data) == 0:
                 self.check_connect = False
@@ -82,15 +82,13 @@ class RovClient:
                 self.client.close()
                 return None
 
-            data = dict(literal_eval(str(data)))
+            data = dict(literal_eval(str(data.decode('utf-8'))))
             self.logi.debug(f'Receiver data : {str(data)}')
             return data
 
     def send_data(self, data:dict):
         #Функция для  отправки пакетов на пульт 
         if self.check_connect:
-            data['time'] = str(datetime.now())
-
             self.logi.debug(f'Send data : {str(data)}')
 
             data_output = str(data).encode("utf-8")
@@ -195,7 +193,7 @@ class Rov_SerialPort_Gebag:
 
         self.logi.info(f'Serial port init: {serial_config}')
 
-    def receiver_data(self):
+    def receiver_data_new(self):
         #прием информации с аппарата
         
         data = [12.6,randint(0,2), randint(25,27), randint(0,5), randint(180,210)]
@@ -204,7 +202,7 @@ class Rov_SerialPort_Gebag:
             
         return data
 
-    def send_data(self, data: list = [50, 50, 50, 50, 50, 50, 90, 0, 0, 0]):
+    def send_data_new(self, data: list = [50, 50, 50, 50, 50, 50, 90, 0, 0, 0]):
         #отправка массива на аппарат
 
         self.logi.debug(f'Send data: {str(data)}')

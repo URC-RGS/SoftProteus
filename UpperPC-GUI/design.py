@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'rovdTrXLq.ui'
+## Form generated from reading UI file 'designvSjDFH.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.3
 ##
@@ -193,11 +193,6 @@ class Ui_UpperPCGUI(object):
         self.button_connect.setObjectName(u"button_connect")
 
         self.horizontalLayout_11.addWidget(self.button_connect)
-
-        self.button_disconnect = QPushButton(self.Settings)
-        self.button_disconnect.setObjectName(u"button_disconnect")
-
-        self.horizontalLayout_11.addWidget(self.button_disconnect)
 
 
         self.gridLayout.addLayout(self.horizontalLayout_11, 9, 0, 1, 1)
@@ -457,11 +452,6 @@ class Ui_UpperPCGUI(object):
 
         self.horizontalLayout_12 = QHBoxLayout()
         self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
-        self.button_read = QPushButton(self.Settings)
-        self.button_read.setObjectName(u"button_read")
-
-        self.horizontalLayout_12.addWidget(self.button_read)
-
         self.button_apply = QPushButton(self.Settings)
         self.button_apply.setObjectName(u"button_apply")
 
@@ -500,7 +490,6 @@ class Ui_UpperPCGUI(object):
         self.charge_label.setText(QCoreApplication.translate("UpperPCGUI", u"<html><head/><body><p align=\"right\"><span style=\" font-size:18pt; font-weight:600; color:#00aaff;\">\u0421harge</span></p></body></html>", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Main), QCoreApplication.translate("UpperPCGUI", u"Main", None))
         self.button_connect.setText(QCoreApplication.translate("UpperPCGUI", u"Connect", None))
-        self.button_disconnect.setText(QCoreApplication.translate("UpperPCGUI", u"Disconnect", None))
         self.cam_up_label.setText(QCoreApplication.translate("UpperPCGUI", u"<html><head/><body><p align=\"right\"><span style=\" font-size:12pt; font-weight:600; color:#00aaff;\">Camera Up", None))
         self.camera_up_set.setItemText(0, QCoreApplication.translate("UpperPCGUI", u"Circle", None))
         self.camera_up_set.setItemText(1, QCoreApplication.translate("UpperPCGUI", u"Square", None))
@@ -590,7 +579,6 @@ class Ui_UpperPCGUI(object):
         self.arm_down_set.setItemText(6, QCoreApplication.translate("UpperPCGUI", u"R1", None))
         self.arm_down_set.setItemText(7, QCoreApplication.translate("UpperPCGUI", u"R2", None))
 
-        self.button_read.setText(QCoreApplication.translate("UpperPCGUI", u"Read", None))
         self.button_apply.setText(QCoreApplication.translate("UpperPCGUI", u"Apply", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Settings), QCoreApplication.translate("UpperPCGUI", u"Settings", None))
     # retranslateUi

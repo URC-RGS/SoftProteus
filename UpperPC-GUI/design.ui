@@ -268,13 +268,6 @@
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QPushButton" name="button_disconnect">
-            <property name="text">
-             <string>Disconnect</string>
-            </property>
-           </widget>
-          </item>
          </layout>
         </item>
         <item row="2" column="0">
@@ -837,13 +830,6 @@
         </item>
         <item row="5" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_12">
-          <item>
-           <widget class="QPushButton" name="button_read">
-            <property name="text">
-             <string>Read</string>
-            </property>
-           </widget>
-          </item>
           <item>
            <widget class="QPushButton" name="button_apply">
             <property name="text">

@@ -6,7 +6,9 @@ from PyQt5 import QtCore
 from RovCommunication import RovServer
 from RovLogging import RovLogger
 from RovControl import RovController
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
 from design import *
 
 
@@ -18,11 +20,9 @@ PATH_LOG = PATH_CONFIG + '.log/'
 
 class RovPultServer(QtCore.QObject):
 
-    commandserver = QtCore.pyqtSignal(dict)
+    rov_telemetry = QtCore.pyqtSignal(dict)
 
     def __init__(self):
-        super().__init__()
-
         # считываем конфиг
         self.config = ConfigParser()
         self.config.read(PATH_CONFIG + 'config_pult.ini')
@@ -37,14 +37,12 @@ class RovPultServer(QtCore.QObject):
         self.logi = RovLogger(self.log_config)
 
         self.server_config = {'logger': self.logi,
-                              'local_host': str(self.rov_conf['local_host']),
-                              'port_local_host': int(self.rov_conf['port_local_host']),
-                              'real_host': str(self.rov_conf['real_host']),
-                              'port_real_host': int(self.rov_conf['port_real_host']),
-                              'local_host_start':util.strtobool(self.rov_conf['local_host_start'])}
+                              'host': str(self.rov_conf['host']),
+                              'port': int(self.rov_conf['port'])
+                              }
 
         # поднимаем связь с аппаратом
-        self.server = RovServer(self.server_config)
+        self.server = RovServer()
 
         # конфиг для джойстика 
         self.joi_config = dict(self.config['JOYSTICK'])
@@ -83,14 +81,12 @@ class RovPultServer(QtCore.QObject):
 
         self.logi.info('Main post init')
 
-    def run_controller(self):
-        #запуск на прослушивание контроллера ps4
-        self.controll_ps4.listen()
 
+    def run_command(self, server_config):
 
-    def run_command(self):
+        print(server_config)
 
-        self.server.listen_to_connection()
+        self.server.listen_to_connection(server_config)
 
         self.logi.info('Pult run')
 
@@ -140,39 +136,46 @@ class RovPultServer(QtCore.QObject):
                 self.logi.info('command stop')
                 break
 
-            QtCore.QThread.msleep(self.rate_command_out)
+            QtCore.QThread.msleep(self.rate_command_out)  
+    
+    def run_controller(self):
+        #запуск на прослушивание контроллера ps4
+        self.controll_ps4.listen()
 
 
+       
 class ApplicationGUI(QMainWindow, Ui_UpperPCGUI):
     def __init__(self):
-        # импорт и создание интерфейса
         super().__init__()
         self.setupUi(self)
 
-        self.button_connect.clicked.connect(self.connect)
-        self.button_disconnect.clicked.connect(self.disconnect)
-        self.button_apply.clicked.connect(self.apply)
-        self.updategui({})
+        self.server = RovPultServer()
 
-        # создание потоков и привязка
         self.thread = QtCore.QThread()
-        
-    def read(self):
-        # TODO доделать подтягивание из конфиг файла 
-        pass
 
+        self.host_value.setText(self.server_config['host'])
+        self.port_value.setText(str(self.server_config['port']))
+        
+        self.button_connect.clicked.connect(self.connect)
+        self.button_apply.clicked.connect(self.apply)
+
+    
     def connect(self):
-        host = self.host_value.text()
-        port = self.port_value.text()
-        print(host, port)
-        self.start_server()
+        '''Запуск сервера для подключения аппарата'''
 
-    def disconnect(self):
-        self.threadserver.server.server.close()
-        self.thread.terminate()
-
+        self.server.server_config['host'] = self.host_value.text()
+        self.server.server_config['port'] = int(self.port_value.text())
         
+
+
+        self.button_connect.setEnabled(False)
+        self.host_value.setEnabled(False)
+        self.port_value.setEnabled(False)
+
+
     def apply(self):
+        '''Обработка настроек управления из GUI '''
+
         #f_b_set = self.f_b_set.value()
         f_b_value = self.f_b_value.value()
         #l_r_set = self.l_r_set.value()
@@ -192,25 +195,11 @@ class ApplicationGUI(QMainWindow, Ui_UpperPCGUI):
         #led_off_set = self.led_off_set.value()
 
         print(f_b_value, l_r_value, u_d_value, tl_tr_value)
-
-
-    def start_server(self):
-        # запуск сервера
-        self.threadserver = RovPultServer()
-        self.threadserver.moveToThread(self.thread)
-        self.threadserver.commandserver.connect(self.updategui)
-        self.thread.started.connect(self.threadserver.run_command)
-        self.thread.start()
-        print(12233)
-
+        
     def start_joi(self):
-        # self.threadJoi = threading.Thread(target=self.threadserver.run_controller)
-        # self.threadJoi.start()
         pass
 
-    @QtCore.pyqtSlot()
     def updategui(self, dataMass):
-
         self.term_value.display(1)
         self.depth_value.display(2)
         self.orientation_value.display(3)

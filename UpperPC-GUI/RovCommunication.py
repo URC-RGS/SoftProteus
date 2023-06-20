@@ -7,31 +7,27 @@ import serial
 
 
 class RovServer:
-    def __init__(self, server_config: dict):
+    def __init__(self):
         '''Класс отвечающий за создание сервера'''
 
-        self.logi = server_config['logger']
         
-        # выбор режима: Отладка\Запуск на реальном аппарате
-        if server_config['local_host_start']:
-            self.host = server_config['local_host']
-            self.port = server_config['port_local_host']
-        else:
-            self.host = server_config['real_host']
-            self.port = server_config['port_real_host']
             
-    
         # настройка сервера
+       
+
+    def listen_to_connection(self, server_config: dict):
+        print(12345)
+        self.logi = server_config['logger']
+        self.host = server_config['host']
+        self.port = server_config['port']
+
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM,)
         self.server.bind((self.host, self.port))
-
-    def listen_to_connection(self):
-        
+        self.server.settimeout(5)
         self.logi.info('ROV waiting for connection')
         self.server.listen(1)
         self.user_socket, self.address = self.server.accept()
         self.check_connect = True
-
         self.logi.info(f'ROV Connected {self.user_socket}')
 
     def receiver_data(self):
